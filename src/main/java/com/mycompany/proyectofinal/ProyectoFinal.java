@@ -4,13 +4,18 @@
 
 package com.mycompany.proyectofinal;
 
+import com.mycompany.proyectofinal.Controller.MainController;
+
 /**
  *
  * @author josei
  */
+
+
 public class ProyectoFinal {
 
-//    public static void main(String[] args) {
-//        System.out.println("Hello World!");
-//    }
+    public static void main(String[] args) {
+        new MainController(); 
+    }
+ 
 }

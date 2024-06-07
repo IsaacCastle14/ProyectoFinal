@@ -79,7 +79,7 @@ public class PanelButtons extends javax.swing.JPanel {
                     .addComponent(btnDelete)
                     .addComponent(btnSearch)
                     .addComponent(btnReport))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
