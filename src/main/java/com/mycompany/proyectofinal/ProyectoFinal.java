@@ -4,7 +4,7 @@
 
 package com.mycompany.proyectofinal;
 
-import com.mycompany.proyectofinal.Controller.MainController;
+import com.mycompany.proyectofinal.Controller.LoginController;
 
 /**
  *
@@ -15,7 +15,7 @@ import com.mycompany.proyectofinal.Controller.MainController;
 public class ProyectoFinal {
 
     public static void main(String[] args) {
-        new MainController(); 
+        new LoginController(); 
     }
  
 }

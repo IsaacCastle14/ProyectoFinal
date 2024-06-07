@@ -4,7 +4,7 @@
  */
 package com.mycompany.proyectofinal.View;
 
-import com.mycompany.proyectofinal.Controller.MainController;
+import com.mycompany.proyectofinal.Controller.LoginController;
 
 /**
  *
@@ -19,7 +19,7 @@ public class PanelDatos extends javax.swing.JPanel {
         initComponents();
     }
     
-    public void listen(MainController controller){
+    public void listen(LoginController controller){
         this.btnLogin.addActionListener(controller);
     }
 
