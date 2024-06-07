@@ -4,7 +4,7 @@
  */
 package com.mycompany.proyectofinal.View;
 
-import com.mycompany.proyectofinal.Controller.LoginController;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -19,8 +19,9 @@ public class PanelDatos extends javax.swing.JPanel {
         initComponents();
     }
     
-    public void listen(LoginController controller){
+    public void listen(ActionListener controller){
         this.btnLogin.addActionListener(controller);
+        this.btnRegister.addActionListener(controller);
     }
 
     /**
@@ -38,6 +39,8 @@ public class PanelDatos extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         txtUser = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
+        btnRegister = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("Usuario:");
@@ -49,6 +52,10 @@ public class PanelDatos extends javax.swing.JPanel {
         jLabel3.setText("Contraseña:");
 
         btnLogin.setText("Login");
+
+        btnRegister.setText("Register");
+
+        jLabel4.setText("Boton provisional del register :");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -68,9 +75,13 @@ public class PanelDatos extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(207, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 20, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnRegister)
+                .addGap(71, 71, 71)
                 .addComponent(btnLogin)
                 .addGap(90, 90, 90))
         );
@@ -87,18 +98,23 @@ public class PanelDatos extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
-                .addComponent(btnLogin)
-                .addGap(62, 62, 62))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLogin)
+                    .addComponent(btnRegister)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(65, 65, 65))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnLogin;
+    public javax.swing.JButton btnRegister;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     public javax.swing.JTextField txtPassword;
     public javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables

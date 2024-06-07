@@ -39,14 +39,31 @@ public class LoginController implements ActionListener {
                 methodsApi.getApiData("http://localhost:8080/login/allUsers");
                 if (methodsApi.searchUser(panelDatos.txtUser.getText(), panelDatos.txtPassword.getText())) {
                     System.out.println("login Correcto");
+                    ///instanciar el controlador principal//
                 } else {
                     System.out.println("Usuario o contraseñass Incorrectos");
                 }
             } catch (Exception error) {
+                ///PONER LABELS CON LOS ERRORES Y MENSAJES///
                 System.out.print(error);
-                //label error concexion api
             }
+            break;
 
+            case "Register":
+                
+            try {
+                methodsApi.postApi("http://localhost:8080/login", panelDatos.txtUser.getText(), panelDatos.txtPassword.getText());
+                System.out.print(methodsApi.getCodigo());
+                if (methodsApi.getCodigo() >= 200 && methodsApi.getCodigo() <= 299) {
+                    ///PONER LABELS CON LOS ERRORES Y MENSAJES///
+                    System.out.println(" : Los datos fueron enviados satisfacotiramente");
+                } else {
+                    ///PONER LABELS CON LOS ERRORES Y MENSAJES///
+                    System.out.println(" : Error de solicitud : " + methodsApi.getCodigo());
+                }
+            } catch (Exception error) {
+                System.out.println("error");
+            }
             break;
 
             case "Exit":

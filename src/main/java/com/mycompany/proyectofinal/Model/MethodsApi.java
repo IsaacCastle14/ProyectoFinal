@@ -20,6 +20,15 @@ import com.fasterxml.jackson.core.type.TypeReference;
 public class MethodsApi {
 
     ArrayList<UserModel> userList;
+    private int codigo = 0;
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
 
     public MethodsApi() {
         userList = new ArrayList();
@@ -63,5 +72,23 @@ public class MethodsApi {
             }
         }
         return login;
+    }
+
+    public void postApi(String url, String user, String password) {
+        codigo = 0;
+        HttpClient client = HttpClient.newHttpClient();
+
+        String json = "{ \"user\": \"" + user + "\", \"password\": \"" + password + "\" }";
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(json))
+                .build();
+
+        client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(response -> response.statusCode())
+                .thenAccept(response -> setCodigo(response))
+                .join();
     }
 }
