@@ -4,7 +4,10 @@
 
 package com.mycompany.proyectofinal;
 
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.mycompany.proyectofinal.Controller.LoginController;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -15,6 +18,11 @@ import com.mycompany.proyectofinal.Controller.LoginController;
 public class ProyectoFinal {
 
     public static void main(String[] args) {
+         try {
+            UIManager.setLookAndFeel(new FlatMacLightLaf());
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
         new LoginController(); 
     }
  

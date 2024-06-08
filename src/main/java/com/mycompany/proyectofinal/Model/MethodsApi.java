@@ -74,11 +74,11 @@ public class MethodsApi {
         return login;
     }
 
-    public void postApi(String url, String user, String password) {
+    public void postApi(String url, String user, String firstName, String lastName, String email, String password, String phone, String carne) {
         codigo = 0;
         HttpClient client = HttpClient.newHttpClient();
 
-        String json = "{ \"user\": \"" + user + "\", \"password\": \"" + password + "\" }";
+        String json = "{ \"user\": \"" + user + "\", \"firstName\": \"" + firstName + "\", \"lastName\": \"" + lastName + "\", \"email\": \"" + email + "\", \"password\": \"" + password + "\", \"phone\": \"" + phone + "\", \"carne\": \"" + carne + "\" }";
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))

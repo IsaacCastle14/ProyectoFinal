@@ -4,7 +4,6 @@
  */
 package com.mycompany.proyectofinal.View;
 
-import com.mycompany.proyectofinal.Controller.LoginController;
 import java.awt.event.ActionListener;
 
 /**
