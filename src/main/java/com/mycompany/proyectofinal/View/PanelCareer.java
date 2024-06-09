@@ -111,7 +111,6 @@ public class PanelCareer extends javax.swing.JPanel {
             }
         });
 
-        jLabel3.setForeground(new java.awt.Color(204, 0, 0));
         jLabel3.setText("Filter:");
 
         btnDelete.setText("Delete");

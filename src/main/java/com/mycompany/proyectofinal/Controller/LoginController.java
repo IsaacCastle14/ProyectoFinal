@@ -4,6 +4,7 @@
  */
 package com.mycompany.proyectofinal.Controller;
 
+import com.mycompany.proyectofinal.Model.EmailSender;
 import com.mycompany.proyectofinal.Model.MethodsApiUsers;
 import com.mycompany.proyectofinal.View.LoginGUI;
 import com.mycompany.proyectofinal.View.PanelDatos;
@@ -23,11 +24,13 @@ public class LoginController implements ActionListener {
     private MethodsApiUsers methodsApi;
     private RegisterGUI registerGUI;
     private RegisterPanel registerPanel;
+    private EmailSender emailSender;
 
     public LoginController() {
         loginGUI = new LoginGUI();
         methodsApi = new MethodsApiUsers();
         registerGUI = new RegisterGUI();
+        emailSender = new EmailSender();
         registerPanel = registerGUI.getRegisterPanel();
         panelDatos = loginGUI.getPanelDatos();
         panelDatos.listen(this);
@@ -47,7 +50,7 @@ public class LoginController implements ActionListener {
                     new MainController();
                     loginGUI.setVisible(false);
                 } else {
-                     ///PONER LABELS CON LOS ERRORES Y MENSAJES///
+                    ///PONER LABELS CON LOS ERRORES Y MENSAJES///
                     System.out.println("Usuario o contraseñass Incorrectos");
                 }
             } catch (Exception error) {
@@ -80,6 +83,17 @@ public class LoginController implements ActionListener {
 
                                 if (methodsApi.getCodigo() >= 200 && methodsApi.getCodigo() <= 299) {
                                     System.out.println(" : Los datos fueron enviados satisfacotiramente");
+
+                                    emailSender.setSubjectNewUser();
+                                    emailSender.setContent(registerPanel.txtFirstName.getText(),
+                                            registerPanel.txtUser.getText(),
+                                            registerPanel.txtPhone.getText(),
+                                            registerPanel.txtCarne.getText(),
+                                            registerPanel.txtEmail.getText());
+                                    emailSender.setEmailTo(this.registerPanel.txtEmail.getText());
+                                    emailSender.createEmail();
+                                    emailSender.sendEmail();
+
                                     registerPanel.clean();
                                     registerGUI.setVisible(false);
                                 } else {
