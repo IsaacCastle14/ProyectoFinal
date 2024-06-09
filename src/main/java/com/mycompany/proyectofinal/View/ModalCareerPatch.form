@@ -53,7 +53,7 @@
               <EmptySpace pref="44" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="btnAddCareer" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnBackModel" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnBackModal" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
           </Group>
@@ -74,7 +74,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtDescription" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnBackModel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnBackModal" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -155,16 +155,15 @@
     <Component class="javax.swing.JButton" name="btnAddCareer">
       <Properties>
         <Property name="text" type="java.lang.String" value="Patch"/>
-        <Property name="actionCommand" type="java.lang.String" value="PatchCareer"/>
+        <Property name="actionCommand" type="java.lang.String" value="PatchDataCareer"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="btnBackModel">
+    <Component class="javax.swing.JButton" name="btnBackModal">
       <Properties>
         <Property name="text" type="java.lang.String" value="Back"/>
-        <Property name="actionCommand" type="java.lang.String" value="BackCareer"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

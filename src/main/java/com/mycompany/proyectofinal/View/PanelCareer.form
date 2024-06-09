@@ -98,6 +98,7 @@
     <Component class="javax.swing.JButton" name="btnAddCareer">
       <Properties>
         <Property name="text" type="java.lang.String" value="Add"/>
+        <Property name="actionCommand" type="java.lang.String" value="AddCareer"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -128,6 +129,7 @@
     <Component class="javax.swing.JButton" name="btnPatch">
       <Properties>
         <Property name="text" type="java.lang.String" value="Patch"/>
+        <Property name="actionCommand" type="java.lang.String" value="PatchCareer"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

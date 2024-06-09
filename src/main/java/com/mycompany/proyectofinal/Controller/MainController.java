@@ -5,10 +5,14 @@
 package com.mycompany.proyectofinal.Controller;
 
 import com.mycompany.proyectofinal.Model.CareerModel;
+import com.mycompany.proyectofinal.Model.CourseModel;
 import com.mycompany.proyectofinal.Model.MethodsApiCareers;
+import com.mycompany.proyectofinal.Model.MethodsApiCourse;
 import com.mycompany.proyectofinal.View.MainGUI;
 import com.mycompany.proyectofinal.View.ModalCareerAdd;
 import com.mycompany.proyectofinal.View.ModalCareerPatch;
+import com.mycompany.proyectofinal.View.ModalCourseAdd;
+import com.mycompany.proyectofinal.View.ModalCoursePatch;
 import com.mycompany.proyectofinal.View.PanelCareer;
 import com.mycompany.proyectofinal.View.PanelCourse;
 import com.mycompany.proyectofinal.View.PanelStudyProgram;
@@ -30,8 +34,11 @@ public class MainController implements ActionListener, MouseListener {
     PanelCareer panelCareer;
     PanelCourse panelCourse;
     MethodsApiCareers methodsApiCareers;
+    MethodsApiCourse methodsApiCourse;
     ModalCareerAdd modalCareerAdd;
     ModalCareerPatch modalCareerPatch;
+    ModalCourseAdd modalCourseAdd;
+    ModalCoursePatch modalCoursePatch;
 
     public MainController() {
         mainGUI = new MainGUI();
@@ -39,8 +46,11 @@ public class MainController implements ActionListener, MouseListener {
         panelUsers = mainGUI.getPanelUsers();
         modalCareerAdd = new ModalCareerAdd();
         modalCareerPatch = new ModalCareerPatch();
+        modalCourseAdd = new ModalCourseAdd();
+        modalCoursePatch = new ModalCoursePatch();
         panelStudyProgram = mainGUI.getPanelStudyProgram();
         methodsApiCareers = new MethodsApiCareers();
+        methodsApiCourse = new MethodsApiCourse();
         panelCareer = mainGUI.getPanelCareer();
         panelCourse = mainGUI.getPanelCourse();
         mainGUI.listen(this);
@@ -48,6 +58,10 @@ public class MainController implements ActionListener, MouseListener {
         modalCareerAdd.listen(this);
         modalCareerPatch.listen(this);
         panelCareer.ListenMouse(this);
+        panelCourse.listen(this);
+        modalCourseAdd.listen(this);
+        modalCoursePatch.listen(this);
+        panelCourse.ListenMouse(this);
     }
 
     @Override
@@ -74,13 +88,13 @@ public class MainController implements ActionListener, MouseListener {
                 }
                 break;
 
-            case "Add":
+            case "AddCareer":
                 modalCareerAdd.setVisible(true);
                 break;
 
-            case "Patch":
+            case "PatchCareer":
                 
-                try {                  
+                try {
                 modalCareerPatch.setVisible(true);
                 modalCareerPatch.setTextDefault(methodsApiCareers.getUserTemp(0),
                         methodsApiCareers.getUserTemp(1),
@@ -92,7 +106,7 @@ public class MainController implements ActionListener, MouseListener {
                 System.out.println(error);
             }
 
-            case "AddCareer":
+            case "AddDataCareer":
                 if (modalCareerAdd.isComplete()) {
                     try {
                         methodsApiCareers.postApi("http://localhost:8080/carrera",
@@ -122,7 +136,7 @@ public class MainController implements ActionListener, MouseListener {
                 }
                 break;
 
-            case "PatchCareer":
+            case "PatchDataCareer":
                 if (modalCareerPatch.isComplete()) {
                     try {
                         methodsApiCareers.patchApi("http://localhost:8080/carrera",
@@ -153,11 +167,16 @@ public class MainController implements ActionListener, MouseListener {
                 }
                 break;
 
-            case "BackCareer":
+            case "Back":
                 modalCareerPatch.setVisible(false);
                 modalCareerAdd.setVisible(false);
                 modalCareerAdd.clean();
                 modalCareerPatch.clean();
+
+                modalCoursePatch.setVisible(false);
+                modalCourseAdd.setVisible(false);
+                modalCourseAdd.clean();
+                modalCoursePatch.clean();
                 break;
 
             case "DeleteCareer":
@@ -181,25 +200,154 @@ public class MainController implements ActionListener, MouseListener {
                 System.err.println(error);
             }
             break;
-
             //END ModuleCareer//
+
+            //Module Course//
             case "Courses":
                 mainGUI.tbPanel.setSelectedIndex(3);
+
+                try {
+                    methodsApiCourse.getApiData("http://localhost:8080/curso/allCurso");
+                    panelCourse.setTable(CourseModel.HEADER_COURSE, methodsApiCourse.getMatrix());
+
+                } catch (Exception error) {
+                    System.out.print(error);
+                }
                 break;
 
+            case "AddCourse":
+                modalCourseAdd.setVisible(true);
+                break;
+
+            case "PatchCourse":
+                
+                try {
+                modalCoursePatch.setVisible(true);
+                modalCoursePatch.setTextDefault(methodsApiCourse.getUserTemp(0),
+                        methodsApiCourse.getUserTemp(1),
+                        methodsApiCourse.getUserTemp(2),
+                        methodsApiCourse.getUserTemp(3),
+                        methodsApiCourse.getUserTemp(4),
+                        methodsApiCourse.getUserTemp(5),
+                        methodsApiCourse.getUserTemp(6),
+                        methodsApiCourse.getUserTemp(7)
+                );
+
+            } catch (Exception error) {
+                System.out.println(error);
+            }
+
+            case "AddDataCourse":
+                if (modalCourseAdd.isComplete()) {
+                    try {
+                        methodsApiCourse.postApi("http://localhost:8080/curso",
+                                modalCourseAdd.txtDescription.getText(),
+                                modalCourseAdd.txtName.getText(),
+                                modalCourseAdd.txtBlockBelonging.getText(),
+                                modalCourseAdd.txtTeachingHours.getText(),
+                                modalCourseAdd.txtModality.getText(),
+                                modalCourseAdd.txtIndependentWorkHours.getText(),
+                                modalCourseAdd.txtCreditQuantity.getText(),
+                                modalCourseAdd.txtInitials.getText());
+
+                        System.out.print(methodsApiCourse.getCodigo());
+
+                        if (methodsApiCourse.getCodigo() >= 200 && methodsApiCourse.getCodigo() <= 299) {
+                            System.out.println(" : Los datos fueron enviados satisfacotiramente");
+
+                            methodsApiCourse.getApiData("http://localhost:8080/curso/allCurso");
+                            panelCourse.setTable(CourseModel.HEADER_COURSE, methodsApiCourse.getMatrix());
+
+                            modalCourseAdd.clean();
+                            modalCourseAdd.setVisible(false);
+                        } else {
+                            ///PONER LABELS CON LOS ERRORES Y MENSAJES///
+                            System.out.println(" : Error de solicitud : " + methodsApiCourse.getCodigo());
+                        }
+                    } catch (Exception error) {
+                        System.out.print(error);
+                    }
+                }
+                break;
+
+            case "PatchDataCourse":
+                if (modalCoursePatch.isComplete()) {
+                    try {
+                        methodsApiCourse.patchApi("http://localhost:8080/curso",  
+                                methodsApiCourse.getSelect(), 
+                                modalCoursePatch.txtDescription.getText(), 
+                                modalCoursePatch.txtName.getText(), 
+                                modalCoursePatch.txtBlockBelonging.getText(), 
+                                modalCoursePatch.txtTeachingHours.getText(), 
+                                modalCoursePatch.txtModality.getText(), 
+                                modalCoursePatch.txtIndependentWorkHours.getText(), 
+                                modalCoursePatch.txtCreditQuantity.getText(), 
+                                modalCoursePatch.txtInitials.getText());
+                   
+                        System.out.print(methodsApiCourse.getCodigo());
+
+                        if (methodsApiCourse.getCodigo() >= 200 && methodsApiCourse.getCodigo() <= 299) {
+                            System.out.println(" : Los datos fueron enviados satisfacotiramente");
+
+                            methodsApiCourse.getApiData("http://localhost:8080/curso/allCurso");
+                            panelCourse.setTable(CourseModel.HEADER_COURSE, methodsApiCourse.getMatrix());
+
+                            modalCoursePatch.clean();
+                            modalCoursePatch.setVisible(false);
+                        } else {
+                            ///PONER LABELS CON LOS ERRORES Y MENSAJES///
+                            System.out.println(" : Error de solicitud : " + methodsApiCourse.getCodigo());
+                        }
+                    } catch (Exception error) {
+                        System.out.print(error);
+                    }
+                }
+                break;
+
+            case "DeleteCourse":
+                
+                try {
+                methodsApiCourse.deleteApiData("http://localhost:8080/curso/" + methodsApiCourse.getSelect());
+
+                if (methodsApiCourse.getCodigo() >= 200 && methodsApiCourse.getCodigo() <= 299) {
+                    System.out.println(" : Los datos fueron enviados satisfacotiramente");
+
+                    methodsApiCourse.getApiData("http://localhost:8080/curso/allCurso");
+                    panelCourse.setTable(CourseModel.HEADER_COURSE, methodsApiCourse.getMatrix());
+
+                    modalCourseAdd.clean();
+                    modalCourseAdd.setVisible(false);
+                } else {
+                    ///PONER LABELS CON LOS ERRORES Y MENSAJES///
+                    System.out.println(" : Error de solicitud : " + methodsApiCourse.getCodigo());
+                }
+            } catch (Exception error) {
+                System.err.println(error);
+            }
+            break;            
+            //END Module Curse//
         }
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
         try {
+            if (panelCareer.isVisible()) {
+                String[] carrera;
+                carrera = panelCareer.getRow();
+                methodsApiCareers.setUserTemp(carrera);
+                CareerModel career = methodsApiCareers.find(carrera[3]);
+                methodsApiCareers.setSelect(career.getId());
+                System.out.println(career.getId());
 
-            String[] carrera;
-            carrera = panelCareer.getRow();
-            methodsApiCareers.setUserTemp(carrera);
-            CareerModel career = methodsApiCareers.find(carrera[3]);
-            methodsApiCareers.setSelect(career.getId());
-            System.out.println(career.getId());
+            } else if (panelCourse.isVisible()) {
+                String[] curso;
+                curso = panelCourse.getRow();
+                methodsApiCourse.setUserTemp(curso);
+                CourseModel course = methodsApiCourse.find(curso[1]);
+                methodsApiCourse.setSelect(course.getId());
+                System.out.println(course.getId());
+            }
 
         } catch (Exception error) {
             System.err.println(error);

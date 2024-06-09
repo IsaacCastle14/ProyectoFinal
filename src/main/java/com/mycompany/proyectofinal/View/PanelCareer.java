@@ -104,6 +104,7 @@ public class PanelCareer extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tblCarrers);
 
         btnAddCareer.setText("Add");
+        btnAddCareer.setActionCommand("AddCareer");
 
         txtFilter.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -117,6 +118,7 @@ public class PanelCareer extends javax.swing.JPanel {
         btnDelete.setActionCommand("DeleteCareer");
 
         btnPatch.setText("Patch");
+        btnPatch.setActionCommand("PatchCareer");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

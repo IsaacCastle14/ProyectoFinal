@@ -22,7 +22,7 @@ public class ModalCareerPatch extends javax.swing.JFrame {
 
     public void listen(ActionListener controller) {
         this.btnAddCareer.addActionListener(controller);
-        this.btnBackModel.addActionListener(controller);
+        this.btnBackModal.addActionListener(controller);
     }
 
     public boolean isComplete() {
@@ -76,7 +76,7 @@ public class ModalCareerPatch extends javax.swing.JFrame {
         txtCareerCode = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         btnAddCareer = new javax.swing.JButton();
-        btnBackModel = new javax.swing.JButton();
+        btnBackModal = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -95,10 +95,9 @@ public class ModalCareerPatch extends javax.swing.JFrame {
         jLabel6.setText("Add Career");
 
         btnAddCareer.setText("Patch");
-        btnAddCareer.setActionCommand("PatchCareer");
+        btnAddCareer.setActionCommand("PatchDataCareer");
 
-        btnBackModel.setText("Back");
-        btnBackModel.setActionCommand("BackCareer");
+        btnBackModal.setText("Back");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,7 +126,7 @@ public class ModalCareerPatch extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAddCareer)
-                    .addComponent(btnBackModel))
+                    .addComponent(btnBackModal))
                 .addGap(26, 26, 26))
         );
         layout.setVerticalGroup(
@@ -144,7 +143,7 @@ public class ModalCareerPatch extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(btnBackModel))
+                    .addComponent(btnBackModal))
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -169,7 +168,7 @@ public class ModalCareerPatch extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnAddCareer;
-    public javax.swing.JButton btnBackModel;
+    public javax.swing.JButton btnBackModal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
