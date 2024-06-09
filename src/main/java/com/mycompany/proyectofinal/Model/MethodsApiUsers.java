@@ -17,7 +17,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
  *
  * @author Marco
  */
-public class MethodsApi {
+public class MethodsApiUsers {
 
     ArrayList<UserModel> userList;
     private int codigo = 0;
@@ -30,7 +30,7 @@ public class MethodsApi {
         return codigo;
     }
 
-    public MethodsApi() {
+    public MethodsApiUsers() {
         userList = new ArrayList();
     }
 

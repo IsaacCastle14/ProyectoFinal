@@ -4,6 +4,15 @@
  */
 package com.mycompany.proyectofinal.View;
 
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author Marco
@@ -13,8 +22,52 @@ public class PanelCareer extends javax.swing.JPanel {
     /**
      * Creates new form PanelUsers
      */
+    TableRowSorter<TableModel> sorter;
+    public DefaultTableModel model;
+
     public PanelCareer() {
         initComponents();
+    }
+
+    public void setTable(String[] header, String[][] data) {
+        List<String[]> filteredData = new ArrayList<>();
+        for (String[] row : data) {
+            boolean isEmpty = true;
+            for (String cell : row) {
+                if (cell != null && !cell.trim().isEmpty()) {
+                    isEmpty = false;
+                    break;
+                }
+            }
+            if (!isEmpty) {
+                filteredData.add(row);
+            }
+        }
+        model = new DefaultTableModel(filteredData.toArray(new String[0][]), header);
+        this.tblCarrers.setModel(model);
+        this.tblCarrers.setAutoCreateRowSorter(true);
+        this.sorter = new TableRowSorter<>(model);
+        this.tblCarrers.setRowSorter(sorter);
+        this.jScrollPane1.setViewportView(this.tblCarrers);
+    }
+
+    public void listen(ActionListener controller) {
+        this.btnAddCareer.addActionListener(controller);
+        this.btnDelete.addActionListener(controller);
+        this.btnPatch.addActionListener(controller);
+    }
+
+    public void ListenMouse(MouseListener controller) {
+        this.tblCarrers.addMouseListener(controller);
+    }
+
+    public String[] getRow() {
+        String[] dataRow = new String[this.tblCarrers.getColumnCount()];
+        int selectedRow = this.tblCarrers.getSelectedRow();
+        for (int i = 0; i < dataRow.length; i++) {
+            dataRow[i] = this.tblCarrers.getValueAt(selectedRow, i).toString();
+        }
+        return dataRow;
     }
 
     /**
@@ -27,29 +80,102 @@ public class PanelCareer extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblCarrers = new javax.swing.JTable();
+        btnAddCareer = new javax.swing.JButton();
+        txtFilter = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        btnDelete = new javax.swing.JButton();
+        btnPatch = new javax.swing.JButton();
 
         jLabel1.setText("Panel Career");
+
+        tblCarrers.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblCarrers);
+
+        btnAddCareer.setText("Add");
+
+        txtFilter.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtFilterKeyReleased(evt);
+            }
+        });
+
+        jLabel3.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel3.setText("Filter:");
+
+        btnDelete.setText("Delete");
+        btnDelete.setActionCommand("DeleteCareer");
+
+        btnPatch.setText("Patch");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(582, 582, 582)
+                .addGap(25, 25, 25)
                 .addComponent(jLabel1)
-                .addContainerGap(632, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(287, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAddCareer)
+                        .addGap(28, 28, 28)
+                        .addComponent(btnDelete)
+                        .addGap(26, 26, 26)
+                        .addComponent(btnPatch)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 761, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(232, 232, 232))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(312, 312, 312)
+                .addGap(19, 19, 19)
                 .addComponent(jLabel1)
-                .addContainerGap(392, Short.MAX_VALUE))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(txtFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnAddCareer)
+                        .addComponent(btnDelete)
+                        .addComponent(btnPatch)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(156, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtFilterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFilterKeyReleased
+        this.sorter.setRowFilter(RowFilter.regexFilter("(?i)" + txtFilter.getText()));
+    }//GEN-LAST:event_txtFilterKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnAddCareer;
+    public javax.swing.JButton btnDelete;
+    public javax.swing.JButton btnPatch;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JTable tblCarrers;
+    public javax.swing.JTextField txtFilter;
     // End of variables declaration//GEN-END:variables
 }

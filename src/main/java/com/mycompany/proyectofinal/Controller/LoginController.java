@@ -4,7 +4,7 @@
  */
 package com.mycompany.proyectofinal.Controller;
 
-import com.mycompany.proyectofinal.Model.MethodsApi;
+import com.mycompany.proyectofinal.Model.MethodsApiUsers;
 import com.mycompany.proyectofinal.View.LoginGUI;
 import com.mycompany.proyectofinal.View.PanelDatos;
 import com.mycompany.proyectofinal.View.RegisterGUI;
@@ -20,13 +20,13 @@ public class LoginController implements ActionListener {
 
     private LoginGUI loginGUI;
     private PanelDatos panelDatos;
-    private MethodsApi methodsApi;
+    private MethodsApiUsers methodsApi;
     private RegisterGUI registerGUI;
     private RegisterPanel registerPanel;
 
     public LoginController() {
         loginGUI = new LoginGUI();
-        methodsApi = new MethodsApi();
+        methodsApi = new MethodsApiUsers();
         registerGUI = new RegisterGUI();
         registerPanel = registerGUI.getRegisterPanel();
         panelDatos = loginGUI.getPanelDatos();
@@ -45,7 +45,7 @@ public class LoginController implements ActionListener {
                 methodsApi.getApiData("http://localhost:8080/usuario/allUsuario");
                 if (methodsApi.searchUser(panelDatos.txtUser.getText(), panelDatos.txtPassword.getText())) {
                     new MainController();
-                    loginGUI.dispose();
+                    loginGUI.setVisible(false);
                 } else {
                      ///PONER LABELS CON LOS ERRORES Y MENSAJES///
                     System.out.println("Usuario o contraseñass Incorrectos");
