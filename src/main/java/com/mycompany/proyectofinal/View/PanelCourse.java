@@ -52,7 +52,7 @@ public class PanelCourse extends javax.swing.JPanel {
     }
 
     public void listen(ActionListener controller) {
-        this.btnAddCareer.addActionListener(controller);
+        this.btnAdd.addActionListener(controller);
         this.btnDelete.addActionListener(controller);
         this.btnPatch.addActionListener(controller);
     }
@@ -81,7 +81,7 @@ public class PanelCourse extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCourse = new javax.swing.JTable();
-        btnAddCareer = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnPatch = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -101,8 +101,8 @@ public class PanelCourse extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblCourse);
 
-        btnAddCareer.setText("Add");
-        btnAddCareer.setActionCommand("AddCourse");
+        btnAdd.setText("Add");
+        btnAdd.setActionCommand("AddCourse");
 
         btnDelete.setText("Delete");
         btnDelete.setActionCommand("DeleteCourse");
@@ -132,7 +132,7 @@ public class PanelCourse extends javax.swing.JPanel {
                 .addContainerGap(191, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAddCareer)
+                        .addComponent(btnAdd)
                         .addGap(28, 28, 28)
                         .addComponent(btnDelete)
                         .addGap(26, 26, 26)
@@ -155,7 +155,7 @@ public class PanelCourse extends javax.swing.JPanel {
                         .addComponent(jLabel3)
                         .addComponent(txtFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnAddCareer)
+                        .addComponent(btnAdd)
                         .addComponent(btnDelete)
                         .addComponent(btnPatch)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -170,7 +170,7 @@ public class PanelCourse extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnAddCareer;
+    public javax.swing.JButton btnAdd;
     public javax.swing.JButton btnDelete;
     public javax.swing.JButton btnPatch;
     private javax.swing.JLabel jLabel1;

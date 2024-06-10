@@ -28,6 +28,7 @@ public class MainGUI extends javax.swing.JFrame {
         this.btnCourses.addActionListener(controller);
         this.btnStudyProgram.addActionListener(controller);
         this.btnUsers.addActionListener(controller);
+        this.btnMenu.addActionListener(controller);
     }
 
     public PanelUsers getPanelUsers() {
@@ -46,6 +47,10 @@ public class MainGUI extends javax.swing.JFrame {
         return panelCourse1;
     }
 
+    public PanelMain getPanelMain() {
+        return panelMain1;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,16 +61,17 @@ public class MainGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         btnCourses = new javax.swing.JButton();
         btnCareers = new javax.swing.JButton();
         btnStudyProgram = new javax.swing.JButton();
         btnUsers = new javax.swing.JButton();
+        btnMenu = new javax.swing.JButton();
         tbPanel = new javax.swing.JTabbedPane();
         panelUsers1 = new com.mycompany.proyectofinal.View.PanelUsers();
         panelStudyProgram1 = new com.mycompany.proyectofinal.View.PanelStudyProgram();
         panelCareer1 = new com.mycompany.proyectofinal.View.PanelCareer();
         panelCourse1 = new com.mycompany.proyectofinal.View.PanelCourse();
+        panelMain1 = new com.mycompany.proyectofinal.View.PanelMain();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -84,8 +90,6 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Gestión de Actividades Académicas");
-
         btnCourses.setText("Courses");
         btnCourses.setContentAreaFilled(false);
         btnCourses.addActionListener(new java.awt.event.ActionListener() {
@@ -103,14 +107,18 @@ public class MainGUI extends javax.swing.JFrame {
         btnUsers.setText("Users");
         btnUsers.setContentAreaFilled(false);
 
+        btnMenu.setText("Gestión de Actividades Académicas");
+        btnMenu.setActionCommand("Menu");
+        btnMenu.setContentAreaFilled(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 571, Short.MAX_VALUE)
+                .addGap(15, 15, 15)
+                .addComponent(btnMenu)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 532, Short.MAX_VALUE)
                 .addComponent(btnUsers)
                 .addGap(56, 56, 56)
                 .addComponent(btnStudyProgram)
@@ -125,12 +133,11 @@ public class MainGUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(15, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnCourses)
-                        .addComponent(btnCareers)
-                        .addComponent(btnStudyProgram)
-                        .addComponent(btnUsers)))
+                    .addComponent(btnCourses)
+                    .addComponent(btnCareers)
+                    .addComponent(btnStudyProgram)
+                    .addComponent(btnUsers)
+                    .addComponent(btnMenu))
                 .addGap(6, 6, 6))
         );
 
@@ -141,6 +148,9 @@ public class MainGUI extends javax.swing.JFrame {
         tbPanel.addTab("tab2", panelStudyProgram1);
         tbPanel.addTab("tab3", panelCareer1);
         tbPanel.addTab("tab4", panelCourse1);
+        tbPanel.addTab("tab5", panelMain1);
+
+        tbPanel.setSelectedIndex(4);
 
         getContentPane().add(tbPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
 
@@ -166,12 +176,13 @@ public class MainGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnCareers;
     public javax.swing.JButton btnCourses;
+    public javax.swing.JButton btnMenu;
     public javax.swing.JButton btnStudyProgram;
     public javax.swing.JButton btnUsers;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private com.mycompany.proyectofinal.View.PanelCareer panelCareer1;
     private com.mycompany.proyectofinal.View.PanelCourse panelCourse1;
+    private com.mycompany.proyectofinal.View.PanelMain panelMain1;
     private com.mycompany.proyectofinal.View.PanelStudyProgram panelStudyProgram1;
     private com.mycompany.proyectofinal.View.PanelUsers panelUsers1;
     public javax.swing.JTabbedPane tbPanel;

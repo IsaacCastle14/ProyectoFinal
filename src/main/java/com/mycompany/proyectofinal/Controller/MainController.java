@@ -8,13 +8,18 @@ import com.mycompany.proyectofinal.Model.CareerModel;
 import com.mycompany.proyectofinal.Model.CourseModel;
 import com.mycompany.proyectofinal.Model.MethodsApiCareers;
 import com.mycompany.proyectofinal.Model.MethodsApiCourse;
+import com.mycompany.proyectofinal.Model.MethodsApiStudyProgram;
+import com.mycompany.proyectofinal.Model.StudyProgramModel;
 import com.mycompany.proyectofinal.View.MainGUI;
 import com.mycompany.proyectofinal.View.ModalCareerAdd;
 import com.mycompany.proyectofinal.View.ModalCareerPatch;
 import com.mycompany.proyectofinal.View.ModalCourseAdd;
 import com.mycompany.proyectofinal.View.ModalCoursePatch;
+import com.mycompany.proyectofinal.View.ModalStudyProgramAdd;
+import com.mycompany.proyectofinal.View.ModalStudyProgramPatch;
 import com.mycompany.proyectofinal.View.PanelCareer;
 import com.mycompany.proyectofinal.View.PanelCourse;
+import com.mycompany.proyectofinal.View.PanelMain;
 import com.mycompany.proyectofinal.View.PanelStudyProgram;
 import com.mycompany.proyectofinal.View.PanelUsers;
 import java.awt.event.ActionEvent;
@@ -33,12 +38,17 @@ public class MainController implements ActionListener, MouseListener {
     PanelStudyProgram panelStudyProgram;
     PanelCareer panelCareer;
     PanelCourse panelCourse;
+    PanelMain panelMain;
     MethodsApiCareers methodsApiCareers;
     MethodsApiCourse methodsApiCourse;
+    MethodsApiStudyProgram methodsApiStudyProgram;
     ModalCareerAdd modalCareerAdd;
     ModalCareerPatch modalCareerPatch;
     ModalCourseAdd modalCourseAdd;
     ModalCoursePatch modalCoursePatch;
+
+    ModalStudyProgramAdd modalStudyProgramAdd;
+    ModalStudyProgramPatch modalStudyProgramPatch;
 
     public MainController() {
         mainGUI = new MainGUI();
@@ -48,11 +58,15 @@ public class MainController implements ActionListener, MouseListener {
         modalCareerPatch = new ModalCareerPatch();
         modalCourseAdd = new ModalCourseAdd();
         modalCoursePatch = new ModalCoursePatch();
-        panelStudyProgram = mainGUI.getPanelStudyProgram();
+        modalStudyProgramAdd = new ModalStudyProgramAdd();
+        modalStudyProgramPatch = new ModalStudyProgramPatch();
         methodsApiCareers = new MethodsApiCareers();
         methodsApiCourse = new MethodsApiCourse();
+        methodsApiStudyProgram = new MethodsApiStudyProgram();
+        panelStudyProgram = mainGUI.getPanelStudyProgram();
         panelCareer = mainGUI.getPanelCareer();
         panelCourse = mainGUI.getPanelCourse();
+        panelMain = mainGUI.getPanelMain();
         mainGUI.listen(this);
         panelCareer.listen(this);
         modalCareerAdd.listen(this);
@@ -62,19 +76,139 @@ public class MainController implements ActionListener, MouseListener {
         modalCourseAdd.listen(this);
         modalCoursePatch.listen(this);
         panelCourse.ListenMouse(this);
+        panelStudyProgram.listen(this);
+        modalStudyProgramAdd.listen(this);
+        modalStudyProgramPatch.listen(this);
+        panelStudyProgram.ListenMouse(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
 
+            case "Menu":
+                mainGUI.tbPanel.setSelectedIndex(4);
+                break;
+
             case "Users":
                 mainGUI.tbPanel.setSelectedIndex(0);
                 break;
 
+            //ModuleStudyProgram//
             case "Study Program":
                 mainGUI.tbPanel.setSelectedIndex(1);
+
+                try {
+                    methodsApiStudyProgram.getApiData("http://localhost:8080/planEstudio/allPlanEstudio");
+                    panelStudyProgram.setTable(StudyProgramModel.HEADER_CURRICULUM, methodsApiStudyProgram.getMatrix());
+
+                } catch (Exception error) {
+                    System.out.print(error);
+                }
                 break;
+
+            case "AddStudyProgram":
+                modalStudyProgramAdd.setVisible(true);
+                break;
+
+            case "PatchStudyProgram":
+                
+                try {
+                modalStudyProgramPatch.setVisible(true);
+                modalStudyProgramPatch.setTextDefault(methodsApiStudyProgram.getUserTemp(0),
+                        methodsApiStudyProgram.getUserTemp(1),
+                        methodsApiStudyProgram.getUserTemp(2),
+                        methodsApiStudyProgram.getUserTemp(3),
+                        methodsApiStudyProgram.getUserTemp(4));
+
+            } catch (Exception error) {
+                System.out.println(error);
+            }
+
+            case "AddDataStudyProgram":
+                if (modalStudyProgramAdd.isComplete()) {
+                    try {
+                        methodsApiStudyProgram.postApi("http://localhost:8080/planEstudio",
+                                modalStudyProgramAdd.txtName.getText(),
+                                modalStudyProgramAdd.txtDescription.getText(),
+                                modalStudyProgramAdd.txtNumberCredits.getText(),
+                                modalStudyProgramAdd.txtEffectiveDate.getText(),
+                                modalStudyProgramAdd.txtApprovalDate.getText());
+
+                        System.out.print(methodsApiStudyProgram.getCodigo());
+
+                        if (methodsApiStudyProgram.getCodigo() >= 200 && methodsApiStudyProgram.getCodigo() <= 299) {
+                            System.out.println(" : Los datos fueron enviados satisfacotiramente");
+
+                            methodsApiStudyProgram.getApiData("http://localhost:8080/planEstudio/allPlanEstudio");
+                            panelStudyProgram.setTable(StudyProgramModel.HEADER_CURRICULUM, methodsApiStudyProgram.getMatrix());
+
+                            modalStudyProgramAdd.clean();
+                            modalStudyProgramAdd.setVisible(false);
+                        } else {
+                            ///PONER LABELS CON LOS ERRORES Y MENSAJES///
+                            System.out.println(" : Error de solicitud : " + methodsApiStudyProgram.getCodigo());
+                        }
+                    } catch (Exception error) {
+                        System.out.print(error);
+                    }
+                }
+                break;
+
+            case "PatchDataStudyProgram":
+                if (modalStudyProgramPatch.isComplete()) {
+                    try {
+                        methodsApiStudyProgram.patchApi("http://localhost:8080/planEstudio",
+                                methodsApiStudyProgram.getSelect(),
+                                modalStudyProgramPatch.txtName.getText(),
+                                modalStudyProgramPatch.txtDescription.getText(),
+                                modalStudyProgramPatch.txtNumberCredits.getText(),
+                                modalStudyProgramPatch.txtEffectiveDate.getText(),
+                                modalStudyProgramPatch.txtApprovalDate.getText());
+
+                        System.out.print(methodsApiStudyProgram.getCodigo());
+
+                        if (methodsApiStudyProgram.getCodigo() >= 200 && methodsApiStudyProgram.getCodigo() <= 299) {
+                            System.out.println(" : Los datos fueron enviados satisfacotiramente");
+
+                            methodsApiStudyProgram.getApiData("http://localhost:8080/planEstudio/allPlanEstudio");
+                            panelStudyProgram.setTable(StudyProgramModel.HEADER_CURRICULUM, methodsApiStudyProgram.getMatrix());
+
+                            modalStudyProgramPatch.clean();
+                            modalStudyProgramPatch.setVisible(false);
+                        } else {
+                            ///PONER LABELS CON LOS ERRORES Y MENSAJES///
+                            System.out.println(" : Error de solicitud : " + methodsApiStudyProgram.getCodigo());
+                        }
+                    } catch (Exception error) {
+                        System.out.print(error);
+                    }
+                }
+                break;
+
+            case "DeleteStudyProgram":
+                
+                try {
+                methodsApiStudyProgram.deleteApiData("http://localhost:8080/planEstudio/" + methodsApiStudyProgram.getSelect());
+
+                if (methodsApiStudyProgram.getCodigo() >= 200 && methodsApiStudyProgram.getCodigo() <= 299) {
+                    System.out.println(" : Los datos fueron enviados satisfacotiramente");
+
+                    methodsApiStudyProgram.getApiData("http://localhost:8080/planEstudio/allPlanEstudio");
+                    panelStudyProgram.setTable(StudyProgramModel.HEADER_CURRICULUM, methodsApiStudyProgram.getMatrix());
+
+                    modalStudyProgramAdd.clean();
+                    modalStudyProgramAdd.setVisible(false);
+                } else {
+                    ///PONER LABELS CON LOS ERRORES Y MENSAJES///
+                    System.out.println(" : Error de solicitud : " + methodsApiStudyProgram.getCodigo());
+                }
+            } catch (Exception error) {
+                System.err.println(error);
+            }
+            break;
+             //END ModuleStudyProgram//
+
             //ModuleCareer//
             case "Careers":
                 mainGUI.tbPanel.setSelectedIndex(2);
@@ -177,6 +311,11 @@ public class MainController implements ActionListener, MouseListener {
                 modalCourseAdd.setVisible(false);
                 modalCourseAdd.clean();
                 modalCoursePatch.clean();
+
+                modalStudyProgramPatch.setVisible(false);
+                modalStudyProgramAdd.setVisible(false);
+                modalStudyProgramAdd.clean();
+                modalStudyProgramPatch.clean();
                 break;
 
             case "DeleteCareer":
@@ -273,17 +412,17 @@ public class MainController implements ActionListener, MouseListener {
             case "PatchDataCourse":
                 if (modalCoursePatch.isComplete()) {
                     try {
-                        methodsApiCourse.patchApi("http://localhost:8080/curso",  
-                                methodsApiCourse.getSelect(), 
-                                modalCoursePatch.txtDescription.getText(), 
-                                modalCoursePatch.txtName.getText(), 
-                                modalCoursePatch.txtBlockBelonging.getText(), 
-                                modalCoursePatch.txtTeachingHours.getText(), 
-                                modalCoursePatch.txtModality.getText(), 
-                                modalCoursePatch.txtIndependentWorkHours.getText(), 
-                                modalCoursePatch.txtCreditQuantity.getText(), 
+                        methodsApiCourse.patchApi("http://localhost:8080/curso",
+                                methodsApiCourse.getSelect(),
+                                modalCoursePatch.txtDescription.getText(),
+                                modalCoursePatch.txtName.getText(),
+                                modalCoursePatch.txtBlockBelonging.getText(),
+                                modalCoursePatch.txtTeachingHours.getText(),
+                                modalCoursePatch.txtModality.getText(),
+                                modalCoursePatch.txtIndependentWorkHours.getText(),
+                                modalCoursePatch.txtCreditQuantity.getText(),
                                 modalCoursePatch.txtInitials.getText());
-                   
+
                         System.out.print(methodsApiCourse.getCodigo());
 
                         if (methodsApiCourse.getCodigo() >= 200 && methodsApiCourse.getCodigo() <= 299) {
@@ -324,7 +463,7 @@ public class MainController implements ActionListener, MouseListener {
             } catch (Exception error) {
                 System.err.println(error);
             }
-            break;            
+            break;
             //END Module Curse//
         }
     }
@@ -347,6 +486,14 @@ public class MainController implements ActionListener, MouseListener {
                 CourseModel course = methodsApiCourse.find(curso[1]);
                 methodsApiCourse.setSelect(course.getId());
                 System.out.println(course.getId());
+
+            } else if (panelStudyProgram.isVisible()) {
+                String[] StudyProgram;
+                StudyProgram = panelStudyProgram.getRow();
+                methodsApiStudyProgram.setUserTemp(StudyProgram);
+                StudyProgramModel studyProgram = methodsApiStudyProgram.find(StudyProgram[0]);
+                methodsApiStudyProgram.setSelect(studyProgram.getId());
+                System.out.println(studyProgram.getId());
             }
 
         } catch (Exception error) {

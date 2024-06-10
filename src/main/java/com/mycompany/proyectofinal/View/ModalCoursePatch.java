@@ -53,14 +53,14 @@ public class ModalCoursePatch extends javax.swing.JFrame {
     }
 
     public void setTextDefault(String t1, String t2, String t3, String t4, String t5, String t6, String t7, String t8) {
-        txtBlockBelonging.setText(t3);
-        txtCreditQuantity.setText(t7);
         txtDescription.setText(t1);
-        txtIndependentWorkHours.setText(t6);
-        txtInitials.setText(t8);
-        txtModality.setText(t5);
         txtName.setText(t2);
+        txtBlockBelonging.setText(t3);
         txtTeachingHours.setText(t4);
+        txtModality.setText(t5);
+        txtIndependentWorkHours.setText(t6);
+        txtCreditQuantity.setText(t7);
+        txtInitials.setText(t8);
     }
 
     /**
@@ -96,7 +96,7 @@ public class ModalCoursePatch extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
 
-        jLabel6.setText("Patch Career");
+        jLabel6.setText("Patch Course");
 
         jLabel1.setText("Description");
 

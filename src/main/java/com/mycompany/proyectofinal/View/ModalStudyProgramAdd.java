@@ -10,12 +10,12 @@ import java.awt.event.ActionListener;
  *
  * @author Marco
  */
-public class ModalCareerPatch extends javax.swing.JFrame {
+public class ModalStudyProgramAdd extends javax.swing.JFrame {
 
     /**
      * Creates new form ModalCarrer
      */
-    public ModalCareerPatch() {
+    public ModalStudyProgramAdd() {
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -27,32 +27,22 @@ public class ModalCareerPatch extends javax.swing.JFrame {
 
     public boolean isComplete() {
         boolean complete = false;
-        if (!txtCareerCode.getText().isBlank()
+        if (!txtName.getText().isBlank()
                 && !txtDescription.getText().isBlank()
-                && !txtName.getText().isBlank()
-                && !txtProfessionalProfile.getText().isBlank()
-                && !txtWorkingMarket.getText().isBlank()) {
+                && !txtNumberCredits.getText().isBlank()
+                && !txtEffectiveDate.getText().isBlank()
+                && !txtApprovalDate.getText().isBlank()) {
             complete = true;
         }
         return complete;
     }
 
     public void clean() {
-        txtCareerCode.setText("");
-        txtDescription.setText("");
         txtName.setText("");
-        txtProfessionalProfile.setText("");
-        txtWorkingMarket.setText("");
-    }
-
-    public void setTextDefault(String t1, String t2, String t3, String t4, String t5) {
-
-        txtCareerCode.setText(t1);
-        txtDescription.setText(t2);
-        txtWorkingMarket.setText(t3);
-        txtName.setText(t4);
-        txtProfessionalProfile.setText(t5);
-
+        txtDescription.setText("");
+        txtNumberCredits.setText("");
+        txtEffectiveDate.setText("");
+        txtApprovalDate.setText("");
     }
 
     /**
@@ -70,10 +60,10 @@ public class ModalCareerPatch extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtDescription = new javax.swing.JTextField();
+        txtNumberCredits = new javax.swing.JTextField();
+        txtEffectiveDate = new javax.swing.JTextField();
+        txtApprovalDate = new javax.swing.JTextField();
         txtName = new javax.swing.JTextField();
-        txtProfessionalProfile = new javax.swing.JTextField();
-        txtWorkingMarket = new javax.swing.JTextField();
-        txtCareerCode = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         btnAddCareer = new javax.swing.JButton();
         btnBackModal = new javax.swing.JButton();
@@ -82,20 +72,20 @@ public class ModalCareerPatch extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
 
-        jLabel1.setText("Carrer Code");
+        jLabel1.setText("Name");
 
         jLabel2.setText("Description");
 
-        jLabel3.setText("Name");
+        jLabel3.setText("Number of Credits");
 
-        jLabel4.setText("Professional Profile");
+        jLabel4.setText("Effective Date");
 
-        jLabel5.setText("Working Market");
+        jLabel5.setText("Approval Date");
 
-        jLabel6.setText("Patch Career");
+        jLabel6.setText("Add Study Program");
 
-        btnAddCareer.setText("Patch");
-        btnAddCareer.setActionCommand("PatchDataCareer");
+        btnAddCareer.setText("Add");
+        btnAddCareer.setActionCommand("AddDataStudyProgram");
 
         btnBackModal.setText("Back");
 
@@ -106,24 +96,22 @@ public class ModalCareerPatch extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(65, 65, 65)
-                        .addComponent(txtCareerCode, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel6)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel4))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtProfessionalProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtWorkingMarket, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                            .addComponent(txtEffectiveDate, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNumberCredits, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtApprovalDate, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAddCareer)
                     .addComponent(btnBackModal))
@@ -137,7 +125,7 @@ public class ModalCareerPatch extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtCareerCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAddCareer))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -146,17 +134,17 @@ public class ModalCareerPatch extends javax.swing.JFrame {
                     .addComponent(btnBackModal))
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNumberCredits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtProfessionalProfile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEffectiveDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtWorkingMarket, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(54, Short.MAX_VALUE))
+                    .addComponent(txtApprovalDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -175,10 +163,10 @@ public class ModalCareerPatch extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    public javax.swing.JTextField txtCareerCode;
+    public javax.swing.JTextField txtApprovalDate;
     public javax.swing.JTextField txtDescription;
+    public javax.swing.JTextField txtEffectiveDate;
     public javax.swing.JTextField txtName;
-    public javax.swing.JTextField txtProfessionalProfile;
-    public javax.swing.JTextField txtWorkingMarket;
+    public javax.swing.JTextField txtNumberCredits;
     // End of variables declaration//GEN-END:variables
 }
