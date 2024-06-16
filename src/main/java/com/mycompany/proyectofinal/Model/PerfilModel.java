@@ -4,8 +4,9 @@
  */
 package com.mycompany.proyectofinal.Model;
 
-import java.util.List;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -14,16 +15,9 @@ import lombok.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class UserModel {
-
+public class PerfilModel {
+    
     private Long id;
-    private String user;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String password;
-    private String phone;
-    private String carne;
-    private List<PerfilModel> listaPerfil;
+    private String description;
+    private String typeUser;
 }

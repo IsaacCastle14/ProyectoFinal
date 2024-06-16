@@ -9,6 +9,8 @@ import com.mycompany.proyectofinal.Model.CourseModel;
 import com.mycompany.proyectofinal.Model.MethodsApiCareers;
 import com.mycompany.proyectofinal.Model.MethodsApiCourse;
 import com.mycompany.proyectofinal.Model.MethodsApiStudyProgram;
+import com.mycompany.proyectofinal.Model.MethodsApiUsers;
+import com.mycompany.proyectofinal.Model.PerfilModel;
 import com.mycompany.proyectofinal.Model.StudyProgramModel;
 import com.mycompany.proyectofinal.View.MainGUI;
 import com.mycompany.proyectofinal.View.ModalCareerAdd;
@@ -22,10 +24,13 @@ import com.mycompany.proyectofinal.View.PanelCourse;
 import com.mycompany.proyectofinal.View.PanelMain;
 import com.mycompany.proyectofinal.View.PanelStudyProgram;
 import com.mycompany.proyectofinal.View.PanelUsers;
+import com.mycompany.proyectofinal.View.PanelUsersAdminUsers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -39,21 +44,23 @@ public class MainController implements ActionListener, MouseListener {
     PanelCareer panelCareer;
     PanelCourse panelCourse;
     PanelMain panelMain;
+    PanelUsersAdminUsers panelUsersAdminUsers;
     MethodsApiCareers methodsApiCareers;
     MethodsApiCourse methodsApiCourse;
     MethodsApiStudyProgram methodsApiStudyProgram;
+    MethodsApiUsers methodsApiUsers;
     ModalCareerAdd modalCareerAdd;
     ModalCareerPatch modalCareerPatch;
     ModalCourseAdd modalCourseAdd;
     ModalCoursePatch modalCoursePatch;
-
     ModalStudyProgramAdd modalStudyProgramAdd;
     ModalStudyProgramPatch modalStudyProgramPatch;
 
-    public MainController() {
+    public MainController(MethodsApiUsers methodsApiUsersInstance) {
         mainGUI = new MainGUI();
         mainGUI.setVisible(true);
         panelUsers = mainGUI.getPanelUsers();
+        panelUsersAdminUsers = mainGUI.getPanelUsersAdminUsers();
         modalCareerAdd = new ModalCareerAdd();
         modalCareerPatch = new ModalCareerPatch();
         modalCourseAdd = new ModalCourseAdd();
@@ -62,6 +69,7 @@ public class MainController implements ActionListener, MouseListener {
         modalStudyProgramPatch = new ModalStudyProgramPatch();
         methodsApiCareers = new MethodsApiCareers();
         methodsApiCourse = new MethodsApiCourse();
+        methodsApiUsers = methodsApiUsersInstance;
         methodsApiStudyProgram = new MethodsApiStudyProgram();
         panelStudyProgram = mainGUI.getPanelStudyProgram();
         panelCareer = mainGUI.getPanelCareer();
@@ -69,6 +77,7 @@ public class MainController implements ActionListener, MouseListener {
         panelMain = mainGUI.getPanelMain();
         mainGUI.listen(this);
         panelCareer.listen(this);
+        panelUsers.listen(this);
         modalCareerAdd.listen(this);
         modalCareerPatch.listen(this);
         panelCareer.ListenMouse(this);
@@ -80,6 +89,8 @@ public class MainController implements ActionListener, MouseListener {
         modalStudyProgramAdd.listen(this);
         modalStudyProgramPatch.listen(this);
         panelStudyProgram.ListenMouse(this);
+        panelUsersAdminUsers.listen(this);
+        panelUsersAdminUsers.ListenMouse(this);
     }
 
     @Override
@@ -91,7 +102,56 @@ public class MainController implements ActionListener, MouseListener {
                 break;
 
             case "Users":
-                mainGUI.tbPanel.setSelectedIndex(0);
+
+                if (methodsApiUsers.getUserTemp().getListaPerfil().isEmpty()) {
+                    mainGUI.tbPanel.setSelectedIndex(0);
+                    panelUsers.lbUser.setText(methodsApiUsers.getUserTemp().getUser());
+                } else {
+                    mainGUI.tbPanel.setSelectedIndex(5);
+                    panelUsers.lbUser.setText(methodsApiUsers.getUserTemp().getUser());
+                }
+                break;
+
+            case "Asociar":
+
+                String mainProfile = panelUsers.cbPp.getSelectedItem().toString();
+                String secondaryProfile = panelUsers.cbPs.getSelectedItem().toString();
+
+                try {
+                    List<PerfilModel> listPerfil = new ArrayList<>();
+                    if (!mainProfile.equalsIgnoreCase("Ninguno") && !secondaryProfile.equalsIgnoreCase("Ninguno")) {
+                        listPerfil = new ArrayList<>();
+                        listPerfil.add(new PerfilModel(methodsApiUsers.getUserTemp().getId(), mainProfile, mainProfile));
+                        listPerfil.add(new PerfilModel(methodsApiUsers.getUserTemp().getId(), secondaryProfile, secondaryProfile));
+                    } else if (!mainProfile.equalsIgnoreCase("Ninguno")) {
+                        listPerfil = new ArrayList<>();
+                        listPerfil.add(new PerfilModel(methodsApiUsers.getUserTemp().getId(), mainProfile, mainProfile));
+                    } else if (!secondaryProfile.equalsIgnoreCase("Ninguno")) {
+                        listPerfil = new ArrayList<>();
+                        listPerfil.add(new PerfilModel(methodsApiUsers.getUserTemp().getId(), secondaryProfile, secondaryProfile));
+                    }
+
+                    methodsApiUsers.patchApi("http://localhost:8080/usuario",
+                            methodsApiUsers.getUserTemp().getId(),
+                            methodsApiUsers.getUserTemp().getUser(),
+                            methodsApiUsers.getUserTemp().getFirstName(),
+                            methodsApiUsers.getUserTemp().getLastName(),
+                            methodsApiUsers.getUserTemp().getEmail(),
+                            methodsApiUsers.getUserTemp().getPassword(),
+                            methodsApiUsers.getUserTemp().getPhone(),
+                            methodsApiUsers.getUserTemp().getCarne(),
+                            listPerfil);
+                    System.out.print(methodsApiUsers.getCodigo());
+
+                    if (methodsApiUsers.getCodigo() >= 200 && methodsApiUsers.getCodigo() <= 299) {
+                        System.out.println(" : Los datos fueron enviados satisfacotiramente");
+                    } else {
+                        ///PONER LABELS CON LOS ERRORES Y MENSAJES///
+                        System.out.println(" : Error de solicitud : " + methodsApiUsers.getCodigo());
+                    }
+                } catch (Exception error) {
+                    System.out.print(error);
+                }
                 break;
 
             //ModuleStudyProgram//
@@ -207,7 +267,7 @@ public class MainController implements ActionListener, MouseListener {
                 System.err.println(error);
             }
             break;
-             //END ModuleStudyProgram//
+            //END ModuleStudyProgram//
 
             //ModuleCareer//
             case "Careers":

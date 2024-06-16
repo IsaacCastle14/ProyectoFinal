@@ -47,7 +47,7 @@ public class LoginController implements ActionListener {
                 try {
                 methodsApi.getApiData("http://localhost:8080/usuario/allUsuario");
                 if (methodsApi.searchUser(panelDatos.txtUser.getText(), panelDatos.txtPassword.getText())) {
-                    new MainController();
+                    new MainController(methodsApi);
                     loginGUI.setVisible(false);
                 } else {
                     ///PONER LABELS CON LOS ERRORES Y MENSAJES///

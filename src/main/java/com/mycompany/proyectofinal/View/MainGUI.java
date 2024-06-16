@@ -51,6 +51,10 @@ public class MainGUI extends javax.swing.JFrame {
         return panelMain1;
     }
 
+    public PanelUsersAdminUsers getPanelUsersAdminUsers() {
+        return panelUsersAdminUsers1;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -72,6 +76,7 @@ public class MainGUI extends javax.swing.JFrame {
         panelCareer1 = new com.mycompany.proyectofinal.View.PanelCareer();
         panelCourse1 = new com.mycompany.proyectofinal.View.PanelCourse();
         panelMain1 = new com.mycompany.proyectofinal.View.PanelMain();
+        panelUsersAdminUsers1 = new com.mycompany.proyectofinal.View.PanelUsersAdminUsers();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -149,6 +154,7 @@ public class MainGUI extends javax.swing.JFrame {
         tbPanel.addTab("tab3", panelCareer1);
         tbPanel.addTab("tab4", panelCourse1);
         tbPanel.addTab("tab5", panelMain1);
+        tbPanel.addTab("tab6", panelUsersAdminUsers1);
 
         tbPanel.setSelectedIndex(4);
 
@@ -158,18 +164,16 @@ public class MainGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
-        // TODO add your handling code here:
         this.setLocation(evt.getXOnScreen() - mouseX, evt.getYOnScreen() - mouseY);
     }//GEN-LAST:event_jPanel1MouseDragged
 
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
-        // TODO add your handling code here:
         mouseX = evt.getX();
         mouseY = evt.getY();
     }//GEN-LAST:event_jPanel1MousePressed
 
     private void btnCoursesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCoursesActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnCoursesActionPerformed
 
 
@@ -185,6 +189,7 @@ public class MainGUI extends javax.swing.JFrame {
     private com.mycompany.proyectofinal.View.PanelMain panelMain1;
     private com.mycompany.proyectofinal.View.PanelStudyProgram panelStudyProgram1;
     private com.mycompany.proyectofinal.View.PanelUsers panelUsers1;
+    private com.mycompany.proyectofinal.View.PanelUsersAdminUsers panelUsersAdminUsers1;
     public javax.swing.JTabbedPane tbPanel;
     // End of variables declaration//GEN-END:variables
 }
