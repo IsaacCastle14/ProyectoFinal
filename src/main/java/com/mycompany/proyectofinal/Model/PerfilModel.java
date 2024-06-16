@@ -16,6 +16,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PerfilModel {
+
+    public PerfilModel(String description, String typeUser) {
+        this.description = description;
+        this.typeUser = typeUser;
+    }
+    
     
     private Long id;
     private String description;

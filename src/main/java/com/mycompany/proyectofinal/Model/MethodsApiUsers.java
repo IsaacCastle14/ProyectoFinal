@@ -24,6 +24,28 @@ public class MethodsApiUsers {
 
     ArrayList<UserModel> userList;
     private UserModel userTemp;
+    private String[] rowSelected;
+    private Long select;
+
+    public ArrayList<UserModel> getUserList() {
+        return userList;
+    }
+
+    public Long getSelect() {
+        return select;
+    }
+
+    public void setSelect(Long select) {
+        this.select = select;
+    }
+
+    public String[] getRowSelected() {
+        return rowSelected;
+    }
+
+    public void setRowSelected(String[] rowSelected) {
+        this.rowSelected = rowSelected;
+    }
 
     public UserModel getUserTemp() {
         return userTemp;
@@ -79,7 +101,7 @@ public class MethodsApiUsers {
             for (UserModel userSearch : userList) {
                 if (userSearch.getUser().equals(user)) {
                     if (userSearch.getPassword().equals(password)) {
-                        userTemp = userSearch;
+                        setUserTemp(userSearch);
                         login = true;
                     }
                 }
@@ -125,6 +147,7 @@ public class MethodsApiUsers {
         jsonNode.putArray("listaPerfil").addAll(listaPerfilJson);
 
         String json = jsonNode.toString();
+        System.out.println("JSON enviado: " + json);
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
@@ -136,5 +159,26 @@ public class MethodsApiUsers {
                 .thenApply(response -> response.statusCode())
                 .thenAccept(response -> setCodigo(response))
                 .join();
+    }
+
+    public String[][] getMatrix() {
+        String[][] matrixRecord = new String[this.userList.size()][UserModel.HEADER_STUDENTS.length];
+        for (int i = 0; i < matrixRecord.length; i++) {
+            for (int j = 0; j < matrixRecord[0].length; j++) {
+                if (this.userList.get(i).getListaPerfil().isEmpty()) {
+                    matrixRecord[i][j] = this.userList.get(i).getData(j);
+                }
+            }
+        }
+        return matrixRecord;
+    }
+
+    public UserModel find(String userP) {
+        for (UserModel user : userList) {
+            if (user.getUser().equalsIgnoreCase(userP)) {            
+                return user;
+            }
+        }
+        return null;
     }
 }

@@ -17,6 +17,8 @@ import lombok.*;
 
 public class UserModel {
 
+    public static final String[] HEADER_STUDENTS = {"User", "First Name", "Last Name", "Email", "Phone", "Carne"};
+
     private Long id;
     private String user;
     private String firstName;
@@ -26,4 +28,73 @@ public class UserModel {
     private String phone;
     private String carne;
     private List<PerfilModel> listaPerfil;
+
+    public String getData(int colum) {
+        switch (colum) {
+            case 0 -> {
+                return this.getUser();
+            }
+            case 1 -> {
+                return this.getFirstName();
+            }
+            case 2 -> {
+                return this.getLastName();
+            }
+            case 3 -> {
+                return this.getEmail();
+            }
+            case 4 -> {
+                return this.getPhone();
+            }
+            case 5 -> {
+                return this.getCarne();
+            }
+        }
+        return "";
+    }
+
+//    public static String verficarPerfiles(List<UserModel> list) {
+//        for (UserModel userIterable : list) {
+//            for (PerfilModel perfil : userIterable.getListaPerfil()) {
+//                switch (perfil.getTypeUser()) {
+//                    case "Profesor" -> {
+//                        return "Profesor";
+//                    }
+//                    case "Estudiante" -> {
+//                        return "Estudiante";
+//                    }
+//                    case "Administrador" -> {
+//                        return "Administrador";
+//                    }
+//                }
+//            }
+//        }
+//        return "";
+//    }
+    public static String verficarPerfiles(UserModel userParameter) {
+        boolean isAdmin = false;
+        boolean isProfessor = false;
+        boolean isStudent = false;
+
+        for (PerfilModel perfil : userParameter.getListaPerfil()) {
+            switch (perfil.getTypeUser()) {
+                case "Administrador" ->
+                    isAdmin = true;
+                case "Profesor" ->
+                    isProfessor = true;
+                case "Estudiante" ->
+                    isStudent = true;
+            }
+        }
+
+        if (isAdmin) {
+            return "Administrador";
+        } else if (isProfessor) {
+            return "Profesor";
+        } else if (isStudent) {
+            return "Estudiante";
+        } else {
+            return "";
+        }
+    }
 }

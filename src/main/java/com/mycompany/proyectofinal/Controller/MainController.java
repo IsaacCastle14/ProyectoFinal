@@ -12,7 +12,9 @@ import com.mycompany.proyectofinal.Model.MethodsApiStudyProgram;
 import com.mycompany.proyectofinal.Model.MethodsApiUsers;
 import com.mycompany.proyectofinal.Model.PerfilModel;
 import com.mycompany.proyectofinal.Model.StudyProgramModel;
+import com.mycompany.proyectofinal.Model.UserModel;
 import com.mycompany.proyectofinal.View.MainGUI;
+import com.mycompany.proyectofinal.View.MessageFrame;
 import com.mycompany.proyectofinal.View.ModalCareerAdd;
 import com.mycompany.proyectofinal.View.ModalCareerPatch;
 import com.mycompany.proyectofinal.View.ModalCourseAdd;
@@ -31,6 +33,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.Timer;
 
 /**
  *
@@ -55,6 +58,7 @@ public class MainController implements ActionListener, MouseListener {
     ModalCoursePatch modalCoursePatch;
     ModalStudyProgramAdd modalStudyProgramAdd;
     ModalStudyProgramPatch modalStudyProgramPatch;
+    MessageFrame messageFrame;
 
     public MainController(MethodsApiUsers methodsApiUsersInstance) {
         mainGUI = new MainGUI();
@@ -75,6 +79,7 @@ public class MainController implements ActionListener, MouseListener {
         panelCareer = mainGUI.getPanelCareer();
         panelCourse = mainGUI.getPanelCourse();
         panelMain = mainGUI.getPanelMain();
+        messageFrame = new MessageFrame();
         mainGUI.listen(this);
         panelCareer.listen(this);
         panelUsers.listen(this);
@@ -106,9 +111,29 @@ public class MainController implements ActionListener, MouseListener {
                 if (methodsApiUsers.getUserTemp().getListaPerfil().isEmpty()) {
                     mainGUI.tbPanel.setSelectedIndex(0);
                     panelUsers.lbUser.setText(methodsApiUsers.getUserTemp().getUser());
-                } else {
+                } else if (UserModel.verficarPerfiles(methodsApiUsers.getUserTemp()).equals("Profesor")
+                        || UserModel.verficarPerfiles(methodsApiUsers.getUserTemp()).equals("Administrador")) {
                     mainGUI.tbPanel.setSelectedIndex(5);
                     panelUsers.lbUser.setText(methodsApiUsers.getUserTemp().getUser());
+
+                    try {
+                        methodsApiUsers.getApiData("http://localhost:8080/usuario/allUsuario");
+                        panelUsersAdminUsers.setTable(UserModel.HEADER_STUDENTS, methodsApiUsers.getMatrix());
+
+                    } catch (Exception error) {
+                        System.out.print(error);
+                    }
+                } else {
+                    mainGUI.tbPanel.setSelectedIndex(4);
+                    messageFrame.setVisible(true);
+                    Timer timer = new Timer(2000, new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            messageFrame.setVisible(false);
+                        }
+                    });
+                    timer.setRepeats(false);
+                    timer.start();
                 }
                 break;
 
@@ -121,14 +146,15 @@ public class MainController implements ActionListener, MouseListener {
                     List<PerfilModel> listPerfil = new ArrayList<>();
                     if (!mainProfile.equalsIgnoreCase("Ninguno") && !secondaryProfile.equalsIgnoreCase("Ninguno")) {
                         listPerfil = new ArrayList<>();
-                        listPerfil.add(new PerfilModel(methodsApiUsers.getUserTemp().getId(), mainProfile, mainProfile));
-                        listPerfil.add(new PerfilModel(methodsApiUsers.getUserTemp().getId(), secondaryProfile, secondaryProfile));
+                        listPerfil.add(new PerfilModel(mainProfile, mainProfile));
+                        listPerfil.add(new PerfilModel(secondaryProfile, secondaryProfile));
+                        System.out.println("1: " + listPerfil.get(0) + "\n" + "2: " + listPerfil.get(1));
                     } else if (!mainProfile.equalsIgnoreCase("Ninguno")) {
                         listPerfil = new ArrayList<>();
-                        listPerfil.add(new PerfilModel(methodsApiUsers.getUserTemp().getId(), mainProfile, mainProfile));
+                        listPerfil.add(new PerfilModel(mainProfile, mainProfile));
                     } else if (!secondaryProfile.equalsIgnoreCase("Ninguno")) {
                         listPerfil = new ArrayList<>();
-                        listPerfil.add(new PerfilModel(methodsApiUsers.getUserTemp().getId(), secondaryProfile, secondaryProfile));
+                        listPerfil.add(new PerfilModel(secondaryProfile, secondaryProfile));
                     }
 
                     methodsApiUsers.patchApi("http://localhost:8080/usuario",
@@ -141,9 +167,23 @@ public class MainController implements ActionListener, MouseListener {
                             methodsApiUsers.getUserTemp().getPhone(),
                             methodsApiUsers.getUserTemp().getCarne(),
                             listPerfil);
+
                     System.out.print(methodsApiUsers.getCodigo());
 
                     if (methodsApiUsers.getCodigo() >= 200 && methodsApiUsers.getCodigo() <= 299) {
+                        methodsApiUsers.getApiData("http://localhost:8080/usuario/allUsuario");
+                        panelUsersAdminUsers.setTable(UserModel.HEADER_STUDENTS, methodsApiUsers.getMatrix());
+                        methodsApiUsers.setUserTemp(new UserModel(methodsApiUsers.getUserTemp().getId(),
+                                methodsApiUsers.getUserTemp().getUser(),
+                                methodsApiUsers.getUserTemp().getFirstName(),
+                                methodsApiUsers.getUserTemp().getLastName(),
+                                methodsApiUsers.getUserTemp().getEmail(),
+                                methodsApiUsers.getUserTemp().getPassword(),
+                                methodsApiUsers.getUserTemp().getPhone(),
+                                methodsApiUsers.getUserTemp().getCarne(),
+                                listPerfil));
+
+                        mainGUI.tbPanel.setSelectedIndex(4);
                         System.out.println(" : Los datos fueron enviados satisfacotiramente");
                     } else {
                         ///PONER LABELS CON LOS ERRORES Y MENSAJES///
@@ -156,14 +196,40 @@ public class MainController implements ActionListener, MouseListener {
 
             //ModuleStudyProgram//
             case "Study Program":
-                mainGUI.tbPanel.setSelectedIndex(1);
+                if (!methodsApiUsers.getUserTemp().getListaPerfil().isEmpty()) {
+                    if (UserModel.verficarPerfiles(methodsApiUsers.getUserTemp()).equals("Profesor")
+                            || UserModel.verficarPerfiles(methodsApiUsers.getUserTemp()).equals("Administrador")) {
+                        mainGUI.tbPanel.setSelectedIndex(1);
+                        try {
+                            methodsApiStudyProgram.getApiData("http://localhost:8080/planEstudio/allPlanEstudio");
+                            panelStudyProgram.setTable(StudyProgramModel.HEADER_CURRICULUM, methodsApiStudyProgram.getMatrix());
 
-                try {
-                    methodsApiStudyProgram.getApiData("http://localhost:8080/planEstudio/allPlanEstudio");
-                    panelStudyProgram.setTable(StudyProgramModel.HEADER_CURRICULUM, methodsApiStudyProgram.getMatrix());
-
-                } catch (Exception error) {
-                    System.out.print(error);
+                        } catch (Exception error) {
+                            System.out.print(error);
+                        }
+                    } else {
+                        messageFrame.setVisible(true);
+                        Timer timer = new Timer(2000, new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                messageFrame.setVisible(false);
+                            }
+                        });
+                        timer.setRepeats(false);
+                        timer.start();
+                    }
+                } else {
+                    mainGUI.tbPanel.setSelectedIndex(0);
+                    panelUsers.lbError.setText("Asocia primero a tu perfil");
+                    Timer timer = new Timer(2000, new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            panelUsers.lbError.setText("");
+                        }
+                    });
+                    timer.setRepeats(false);
+                    timer.start();
+                    System.out.println("Asocia tu usuario a un perfil");
                 }
                 break;
 
@@ -271,14 +337,41 @@ public class MainController implements ActionListener, MouseListener {
 
             //ModuleCareer//
             case "Careers":
-                mainGUI.tbPanel.setSelectedIndex(2);
+                if (!methodsApiUsers.getUserTemp().getListaPerfil().isEmpty()) {
+                    if (UserModel.verficarPerfiles(methodsApiUsers.getUserTemp()).equals("Profesor")
+                            || UserModel.verficarPerfiles(methodsApiUsers.getUserTemp()).equals("Administrador")) {
+                        mainGUI.tbPanel.setSelectedIndex(2);
 
-                try {
-                    methodsApiCareers.getApiData("http://localhost:8080/carrera/allCarrera");
-                    panelCareer.setTable(CareerModel.HEADER_CAREER, methodsApiCareers.getMatrix());
+                        try {
+                            methodsApiCareers.getApiData("http://localhost:8080/carrera/allCarrera");
+                            panelCareer.setTable(CareerModel.HEADER_CAREER, methodsApiCareers.getMatrix());
 
-                } catch (Exception error) {
-                    System.out.print(error);
+                        } catch (Exception error) {
+                            System.out.print(error);
+                        }
+                    } else {
+                        messageFrame.setVisible(true);
+                        Timer timer = new Timer(2000, new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                messageFrame.setVisible(false);
+                            }
+                        });
+                        timer.setRepeats(false);
+                        timer.start();
+                    }
+                } else {
+                    mainGUI.tbPanel.setSelectedIndex(0);
+                    panelUsers.lbError.setText("Asocia primero a tu perfil");
+                    Timer timer = new Timer(2000, new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            panelUsers.lbError.setText("");
+                        }
+                    });
+                    timer.setRepeats(false);
+                    timer.start();
+                    System.out.println("Asocia tu usuario a un perfil");
                 }
                 break;
 
@@ -403,14 +496,41 @@ public class MainController implements ActionListener, MouseListener {
 
             //Module Course//
             case "Courses":
-                mainGUI.tbPanel.setSelectedIndex(3);
+                if (!methodsApiUsers.getUserTemp().getListaPerfil().isEmpty()) {
+                    if (UserModel.verficarPerfiles(methodsApiUsers.getUserTemp()).equals("Profesor")
+                            || UserModel.verficarPerfiles(methodsApiUsers.getUserTemp()).equals("Administrador")) {
+                        mainGUI.tbPanel.setSelectedIndex(3);
 
-                try {
-                    methodsApiCourse.getApiData("http://localhost:8080/curso/allCurso");
-                    panelCourse.setTable(CourseModel.HEADER_COURSE, methodsApiCourse.getMatrix());
+                        try {
+                            methodsApiCourse.getApiData("http://localhost:8080/curso/allCurso");
+                            panelCourse.setTable(CourseModel.HEADER_COURSE, methodsApiCourse.getMatrix());
 
-                } catch (Exception error) {
-                    System.out.print(error);
+                        } catch (Exception error) {
+                            System.out.print(error);
+                        }
+                    } else {
+                        messageFrame.setVisible(true);
+                        Timer timer = new Timer(2000, new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                messageFrame.setVisible(false);
+                            }
+                        });
+                        timer.setRepeats(false);
+                        timer.start();
+                    }
+                } else {
+                    mainGUI.tbPanel.setSelectedIndex(0);
+                    panelUsers.lbError.setText("Asocia primero a tu perfil");
+                    Timer timer = new Timer(2000, new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            panelUsers.lbError.setText("");
+                        }
+                    });
+                    timer.setRepeats(false);
+                    timer.start();
+                    System.out.println("Asocia tu usuario a un perfil");
                 }
                 break;
 
@@ -554,6 +674,14 @@ public class MainController implements ActionListener, MouseListener {
                 StudyProgramModel studyProgram = methodsApiStudyProgram.find(StudyProgram[0]);
                 methodsApiStudyProgram.setSelect(studyProgram.getId());
                 System.out.println(studyProgram.getId());
+
+            } else if (panelUsersAdminUsers.isVisible()) {
+                String[] studentArray;
+                studentArray = panelUsersAdminUsers.getRow();
+                methodsApiUsers.setRowSelected(studentArray);
+                UserModel student = methodsApiUsers.find(studentArray[0]);
+                methodsApiUsers.setSelect(student.getId());
+                System.out.println(student.getId());
             }
 
         } catch (Exception error) {

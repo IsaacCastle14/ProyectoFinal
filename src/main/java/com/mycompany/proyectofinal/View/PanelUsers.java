@@ -41,6 +41,7 @@ public class PanelUsers extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         btnAsociar = new javax.swing.JButton();
+        lbError = new javax.swing.JLabel();
 
         jLabel1.setText("PanelUsers");
 
@@ -59,6 +60,10 @@ public class PanelUsers extends javax.swing.JPanel {
         jLabel5.setText("Perfil Secundario");
 
         btnAsociar.setText("Asociar");
+
+        lbError.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lbError.setForeground(new java.awt.Color(204, 0, 0));
+        lbError.setText(" ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -85,8 +90,11 @@ public class PanelUsers extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lbUser, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(926, Short.MAX_VALUE))
+                                .addComponent(lbUser, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(373, 373, 373)
+                        .addComponent(lbError, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(406, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,7 +117,9 @@ public class PanelUsers extends javax.swing.JPanel {
                     .addComponent(cbPs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnAsociar)
-                .addContainerGap(465, Short.MAX_VALUE))
+                .addGap(54, 54, 54)
+                .addComponent(lbError)
+                .addContainerGap(379, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -123,6 +133,7 @@ public class PanelUsers extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    public javax.swing.JLabel lbError;
     public javax.swing.JLabel lbUser;
     // End of variables declaration//GEN-END:variables
 }
