@@ -21,6 +21,7 @@ import com.mycompany.proyectofinal.View.ModalCourseAdd;
 import com.mycompany.proyectofinal.View.ModalCoursePatch;
 import com.mycompany.proyectofinal.View.ModalStudyProgramAdd;
 import com.mycompany.proyectofinal.View.ModalStudyProgramPatch;
+import com.mycompany.proyectofinal.View.ModalUserPatch;
 import com.mycompany.proyectofinal.View.PanelCareer;
 import com.mycompany.proyectofinal.View.PanelCourse;
 import com.mycompany.proyectofinal.View.PanelMain;
@@ -58,6 +59,7 @@ public class MainController implements ActionListener, MouseListener {
     ModalCoursePatch modalCoursePatch;
     ModalStudyProgramAdd modalStudyProgramAdd;
     ModalStudyProgramPatch modalStudyProgramPatch;
+    ModalUserPatch modalUserPatch;
     MessageFrame messageFrame;
 
     public MainController(MethodsApiUsers methodsApiUsersInstance) {
@@ -71,6 +73,7 @@ public class MainController implements ActionListener, MouseListener {
         modalCoursePatch = new ModalCoursePatch();
         modalStudyProgramAdd = new ModalStudyProgramAdd();
         modalStudyProgramPatch = new ModalStudyProgramPatch();
+        modalUserPatch = new ModalUserPatch();
         methodsApiCareers = new MethodsApiCareers();
         methodsApiCourse = new MethodsApiCourse();
         methodsApiUsers = methodsApiUsersInstance;
@@ -93,6 +96,7 @@ public class MainController implements ActionListener, MouseListener {
         panelStudyProgram.listen(this);
         modalStudyProgramAdd.listen(this);
         modalStudyProgramPatch.listen(this);
+        modalUserPatch.listen(this);
         panelStudyProgram.ListenMouse(this);
         panelUsersAdminUsers.listen(this);
         panelUsersAdminUsers.ListenMouse(this);
@@ -111,15 +115,15 @@ public class MainController implements ActionListener, MouseListener {
                 if (methodsApiUsers.getUserTemp().getListaPerfil().isEmpty()) {
                     mainGUI.tbPanel.setSelectedIndex(0);
                     panelUsers.lbUser.setText(methodsApiUsers.getUserTemp().getUser());
+
                 } else if (UserModel.verficarPerfiles(methodsApiUsers.getUserTemp()).equals("Profesor")
                         || UserModel.verficarPerfiles(methodsApiUsers.getUserTemp()).equals("Administrador")) {
                     mainGUI.tbPanel.setSelectedIndex(5);
-                    panelUsers.lbUser.setText(methodsApiUsers.getUserTemp().getUser());
+                    panelUsersAdminUsers.lbUser.setText(methodsApiUsers.getUserTemp().getUser());
 
                     try {
                         methodsApiUsers.getApiData("http://localhost:8080/usuario/allUsuario");
                         panelUsersAdminUsers.setTable(UserModel.HEADER_STUDENTS, methodsApiUsers.getMatrix());
-
                     } catch (Exception error) {
                         System.out.print(error);
                     }
@@ -191,6 +195,76 @@ public class MainController implements ActionListener, MouseListener {
                     }
                 } catch (Exception error) {
                     System.out.print(error);
+                }
+                break;
+
+            case "PatchUser":
+                System.out.println("patch");
+                try {
+                    String row[];
+                    row = methodsApiUsers.getRowSelected();
+                    modalUserPatch.setTextDefault(row[0]);
+                    if (!modalUserPatch.txtUser.getText().isBlank()) {
+                        modalUserPatch.setVisible(true);
+                    }
+                } catch (Exception error) {
+                    System.out.println(error);
+                    System.out.println("Seleccione una fila valida");
+                }
+                break;
+
+            case "PatchDataUser":
+                if (modalUserPatch.isComplete()) {
+
+                    String mainProfileModal = modalUserPatch.cbPp.getSelectedItem().toString();
+                    String secondaryProfileModal = modalUserPatch.cbPs.getSelectedItem().toString();
+
+                    try {
+                        List<PerfilModel> listPerfil = new ArrayList<>();
+                        if (!mainProfileModal.equalsIgnoreCase("Ninguno") && !secondaryProfileModal.equalsIgnoreCase("Ninguno")) {
+                            listPerfil = new ArrayList<>();
+                            listPerfil.add(new PerfilModel(mainProfileModal, mainProfileModal));
+                            listPerfil.add(new PerfilModel(secondaryProfileModal, secondaryProfileModal));
+                            System.out.println("1: " + listPerfil.get(0) + "\n" + "2: " + listPerfil.get(1));
+                        } else if (!mainProfileModal.equalsIgnoreCase("Ninguno")) {
+                            listPerfil = new ArrayList<>();
+                            listPerfil.add(new PerfilModel(mainProfileModal, mainProfileModal));
+                        } else if (!secondaryProfileModal.equalsIgnoreCase("Ninguno")) {
+                            listPerfil = new ArrayList<>();
+                            listPerfil.add(new PerfilModel(secondaryProfileModal, secondaryProfileModal));
+                        }
+
+                        UserModel updateUser = methodsApiUsers.find(modalUserPatch.txtUser.getText());
+
+                        methodsApiUsers.patchApi("http://localhost:8080/usuario",
+                                updateUser.getId(),
+                                updateUser.getUser(),
+                                updateUser.getFirstName(),
+                                updateUser.getLastName(),
+                                updateUser.getEmail(),
+                                updateUser.getPassword(),
+                                updateUser.getPhone(),
+                                updateUser.getCarne(),
+                                listPerfil);
+
+                        System.out.print(methodsApiUsers.getCodigo());
+
+                        if (methodsApiUsers.getCodigo() >= 200 && methodsApiUsers.getCodigo() <= 299) {
+                            System.out.println(" : Los datos fueron enviados satisfacotiramente");
+
+                            methodsApiUsers.getApiData("http://localhost:8080/usuario/allUsuario");
+                            panelUsersAdminUsers.setTable(UserModel.HEADER_STUDENTS, methodsApiUsers.getMatrix());
+                            methodsApiUsers.setRowSelected(null);
+
+                            modalUserPatch.clean();
+                            modalUserPatch.setVisible(false);
+                        } else {
+                            ///PONER LABELS CON LOS ERRORES Y MENSAJES///
+                            System.out.println(" : Error de solicitud : " + methodsApiUsers.getCodigo());
+                        }
+                    } catch (Exception error) {
+                        System.out.print(error);
+                    }
                 }
                 break;
 
@@ -469,6 +543,9 @@ public class MainController implements ActionListener, MouseListener {
                 modalStudyProgramAdd.setVisible(false);
                 modalStudyProgramAdd.clean();
                 modalStudyProgramPatch.clean();
+
+                modalUserPatch.setVisible(false);
+                modalUserPatch.clean();
                 break;
 
             case "DeleteCareer":

@@ -42,8 +42,7 @@ public class LoginController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
-            case "Login":
-                
+            case "Login":               
                 try {
                 methodsApi.getApiData("http://localhost:8080/usuario/allUsuario");
                 if (methodsApi.searchUser(panelDatos.txtUser.getText(), panelDatos.txtPassword.getText())) {

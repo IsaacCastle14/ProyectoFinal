@@ -53,24 +53,6 @@ public class UserModel {
         return "";
     }
 
-//    public static String verficarPerfiles(List<UserModel> list) {
-//        for (UserModel userIterable : list) {
-//            for (PerfilModel perfil : userIterable.getListaPerfil()) {
-//                switch (perfil.getTypeUser()) {
-//                    case "Profesor" -> {
-//                        return "Profesor";
-//                    }
-//                    case "Estudiante" -> {
-//                        return "Estudiante";
-//                    }
-//                    case "Administrador" -> {
-//                        return "Administrador";
-//                    }
-//                }
-//            }
-//        }
-//        return "";
-//    }
     public static String verficarPerfiles(UserModel userParameter) {
         boolean isAdmin = false;
         boolean isProfessor = false;

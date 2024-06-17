@@ -21,8 +21,7 @@ public class PerfilModel {
         this.description = description;
         this.typeUser = typeUser;
     }
-    
-    
+        
     private Long id;
     private String description;
     private String typeUser;

@@ -47,7 +47,7 @@ public class PanelUsers extends javax.swing.JPanel {
 
         jLabel2.setText("Bienvenido: ");
 
-        lbUser.setText("Nombre Usuario Logeado");
+        lbUser.setText(" ");
 
         jLabel3.setText("Asocie su Usuario a uno o varios perfil");
 

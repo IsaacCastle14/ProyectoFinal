@@ -26,6 +26,7 @@ public class MethodsApiUsers {
     private UserModel userTemp;
     private String[] rowSelected;
     private Long select;
+    private int codigo = 0;
 
     public ArrayList<UserModel> getUserList() {
         return userList;
@@ -54,8 +55,6 @@ public class MethodsApiUsers {
     public void setUserTemp(UserModel userTemp) {
         this.userTemp = userTemp;
     }
-
-    private int codigo = 0;
 
     public void setCodigo(int codigo) {
         this.codigo = codigo;
@@ -175,7 +174,7 @@ public class MethodsApiUsers {
 
     public UserModel find(String userP) {
         for (UserModel user : userList) {
-            if (user.getUser().equalsIgnoreCase(userP)) {            
+            if (user.getUser().equalsIgnoreCase(userP)) {
                 return user;
             }
         }
