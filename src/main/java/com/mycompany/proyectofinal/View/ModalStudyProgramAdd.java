@@ -29,9 +29,7 @@ public class ModalStudyProgramAdd extends javax.swing.JFrame {
         boolean complete = false;
         if (!txtName.getText().isBlank()
                 && !txtDescription.getText().isBlank()
-                && !txtNumberCredits.getText().isBlank()
-                && !txtEffectiveDate.getText().isBlank()
-                && !txtApprovalDate.getText().isBlank()) {
+                && !txtNumberCredits.getText().isBlank()) {
             complete = true;
         }
         return complete;
@@ -41,8 +39,7 @@ public class ModalStudyProgramAdd extends javax.swing.JFrame {
         txtName.setText("");
         txtDescription.setText("");
         txtNumberCredits.setText("");
-        txtEffectiveDate.setText("");
-        txtApprovalDate.setText("");
+
     }
 
     /**
@@ -57,12 +54,8 @@ public class ModalStudyProgramAdd extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         txtDescription = new javax.swing.JTextField();
         txtNumberCredits = new javax.swing.JTextField();
-        txtEffectiveDate = new javax.swing.JTextField();
-        txtApprovalDate = new javax.swing.JTextField();
         txtName = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         btnAddCareer = new javax.swing.JButton();
@@ -77,10 +70,6 @@ public class ModalStudyProgramAdd extends javax.swing.JFrame {
         jLabel2.setText("Description");
 
         jLabel3.setText("Number of Credits");
-
-        jLabel4.setText("Effective Date");
-
-        jLabel5.setText("Approval Date");
 
         jLabel6.setText("Add Study Program");
 
@@ -101,16 +90,12 @@ public class ModalStudyProgramAdd extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEffectiveDate, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNumberCredits, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtApprovalDate, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtNumberCredits, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAddCareer)
@@ -136,15 +121,7 @@ public class ModalStudyProgramAdd extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNumberCredits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtEffectiveDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtApprovalDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
@@ -160,12 +137,8 @@ public class ModalStudyProgramAdd extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    public javax.swing.JTextField txtApprovalDate;
     public javax.swing.JTextField txtDescription;
-    public javax.swing.JTextField txtEffectiveDate;
     public javax.swing.JTextField txtName;
     public javax.swing.JTextField txtNumberCredits;
     // End of variables declaration//GEN-END:variables

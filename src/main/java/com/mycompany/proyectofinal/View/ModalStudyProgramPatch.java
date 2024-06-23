@@ -27,9 +27,7 @@ public class ModalStudyProgramPatch extends javax.swing.JFrame {
 
     public boolean isComplete() {
         boolean complete = false;
-        if (!txtApprovalDate.getText().isBlank()
-                && !txtDescription.getText().isBlank()
-                && !txtEffectiveDate.getText().isBlank()
+        if (!txtDescription.getText().isBlank()
                 && !txtName.getText().isBlank()
                 && !txtNumberCredits.getText().isBlank()) {
             complete = true;
@@ -38,19 +36,15 @@ public class ModalStudyProgramPatch extends javax.swing.JFrame {
     }
 
     public void clean() {
-        txtApprovalDate.setText("");
         txtDescription.setText("");
-        txtEffectiveDate.setText("");
         txtName.setText("");
         txtNumberCredits.setText("");
     }
 
-    public void setTextDefault(String t1, String t2, String t3, String t4, String t5) {
+    public void setTextDefault(String t1, String t2, String t3) {
         txtName.setText(t1);
         txtDescription.setText(t2);
-        txtNumberCredits.setText(t3);
-        txtEffectiveDate.setText(t4);
-        txtApprovalDate.setText(t5);
+        txtNumberCredits.setText(t3);     
     }
 
     /**
@@ -65,16 +59,12 @@ public class ModalStudyProgramPatch extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         btnAddCareer = new javax.swing.JButton();
         btnBackModal = new javax.swing.JButton();
-        txtApprovalDate = new javax.swing.JTextField();
         txtName = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         txtDescription = new javax.swing.JTextField();
         txtNumberCredits = new javax.swing.JTextField();
-        txtEffectiveDate = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -93,10 +83,6 @@ public class ModalStudyProgramPatch extends javax.swing.JFrame {
 
         jLabel3.setText("Number of Credits");
 
-        jLabel4.setText("Effective Date");
-
-        jLabel5.setText("Approval Date");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,16 +95,12 @@ public class ModalStudyProgramPatch extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEffectiveDate, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNumberCredits, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtApprovalDate, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtNumberCredits, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAddCareer)
@@ -147,16 +129,8 @@ public class ModalStudyProgramPatch extends javax.swing.JFrame {
                         .addGap(17, 17, 17)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtNumberCredits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtEffectiveDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(txtApprovalDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(26, Short.MAX_VALUE))
+                            .addComponent(jLabel3))))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -172,12 +146,8 @@ public class ModalStudyProgramPatch extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    public javax.swing.JTextField txtApprovalDate;
     public javax.swing.JTextField txtDescription;
-    public javax.swing.JTextField txtEffectiveDate;
     public javax.swing.JTextField txtName;
     public javax.swing.JTextField txtNumberCredits;
     // End of variables declaration//GEN-END:variables
