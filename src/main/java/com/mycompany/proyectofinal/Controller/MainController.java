@@ -23,6 +23,7 @@ import com.mycompany.proyectofinal.View.PanelStudyProgram;
 import com.mycompany.proyectofinal.View.PanelUsers;
 import com.mycompany.proyectofinal.View.PanelUsersAdminUsers;
 import com.mycompany.proyectofinal.View.PanelUsersCareer;
+import com.mycompany.proyectofinal.View.ReportsPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -54,6 +55,7 @@ public class MainController implements ActionListener {
     PanelPlanCourse panelPlanCourse;
     PanelUsersCareer panelUsersCareer;
     UsersCareerController usersCareerController;
+    ReportsPanel reportsPanel;
 
     public MainController(MethodsApiUsers methodsApiUsersInstance) {
         mainGUI = new MainGUI();
@@ -66,6 +68,7 @@ public class MainController implements ActionListener {
         methodsApiUsers = methodsApiUsersInstance;
         methodsApiStudyProgram = new MethodsApiStudyProgram();
         panelStudyProgram = mainGUI.getPanelStudyProgram();
+        reportsPanel = mainGUI.getReportsPanel();
         panelCareer = mainGUI.getPanelCareer();
         panelCourse = mainGUI.getPanelCourse();
         panelMain = mainGUI.getPanelMain();
@@ -73,6 +76,7 @@ public class MainController implements ActionListener {
 
         messageFrame = new MessageFrame();
         mainGUI.listen(this);
+        reportsPanel.listen(this);
     }
 
     @Override
@@ -332,6 +336,45 @@ public class MainController implements ActionListener {
                     timer.start();
                     System.out.println("Asocia tu usuario a un perfil");
                 }
+                break;
+
+            case "Reports":
+                System.out.println("reportes module");
+                if (!methodsApiUsers.getUserTemp().getListaPerfil().isEmpty()) {
+                    try {
+                        methodsApiUsers.getApiData("http://localhost:8080/usuario/allUsuario");
+                        methodsApiCareers.getApiData("http://localhost:8080/carrera/allCarrera");
+                        reportsPanel.setTable(UserModel.HEADER_Reports, methodsApiUsers.getMatrixReportes(methodsApiCareers.getCareerList()));
+                        mainGUI.tbPanel.setSelectedIndex(8);
+                    } catch (Exception error) {
+                        System.out.print(error);
+                    }
+                } else {
+                    mainGUI.tbPanel.setSelectedIndex(0);
+                    panelUsers.lbError.setText("Asocia primero a tu perfil");
+                    Timer timer = new Timer(2000, new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            panelUsers.lbError.setText("");
+                        }
+                    });
+                    timer.setRepeats(false);
+                    timer.start();
+                    System.out.println("Asocia tu usuario a un perfil");
+                }
+                break;
+
+            case "UserReports":
+                System.out.println("userrs  reports");
+                methodsApiUsers.getApiData("http://localhost:8080/usuario/allUsuario");
+                methodsApiCareers.getApiData("http://localhost:8080/carrera/allCarrera");
+                reportsPanel.setTable(UserModel.HEADER_Reports, methodsApiUsers.getMatrixReportes(methodsApiCareers.getCareerList()));
+                break;
+
+            case "StudyProgramsReports":
+                System.out.println("panel study reports");
+                methodsApiStudyProgram.getApiData("http://localhost:8080/planEstudio/allPlanEstudio");
+                reportsPanel.setTable(StudyProgramModel.HEADER_CURRICULUM_CURSES, methodsApiStudyProgram.getMatrixStudyCourse());
                 break;
 
             case "Exit":

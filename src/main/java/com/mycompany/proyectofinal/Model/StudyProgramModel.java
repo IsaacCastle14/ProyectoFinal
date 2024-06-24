@@ -4,6 +4,7 @@
  */
 package com.mycompany.proyectofinal.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,9 +17,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class StudyProgramModel {
 
     public static final String[] HEADER_CURRICULUM = {"Name", "Description", "Number of Credits", "Effective Date", "Approval Date"};
+    public static final String[] HEADER_CURRICULUM_CURSES = {"Name", "Number of courses", "Name of all courses", "Number of credits"};
 
     private Long id;
     private String name;
@@ -47,5 +50,5 @@ public class StudyProgramModel {
             }
         }
         return "";
-    }
+    }  
 }

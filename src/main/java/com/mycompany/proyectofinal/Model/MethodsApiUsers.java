@@ -86,7 +86,8 @@ public class MethodsApiUsers {
         ObjectMapper objectMapper = new ObjectMapper();
         userList = null;
         try {
-            userList = objectMapper.readValue(responseBody, new TypeReference<ArrayList<UserModel>>() {});
+            userList = objectMapper.readValue(responseBody, new TypeReference<ArrayList<UserModel>>() {
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -191,13 +192,47 @@ public class MethodsApiUsers {
         String[][] matrixRecord = new String[this.userList.size()][UserModel.HEADER_STUDENTS.length];
         for (int i = 0; i < matrixRecord.length; i++) {
             for (int j = 0; j < matrixRecord[0].length; j++) {
-             //   if (this.userList.get(i).getCarrera() == null) {
-                    matrixRecord[i][j] = this.userList.get(i).getData(j);                    
-             //   }
+                //   if (this.userList.get(i).getCarrera() == null) {
+                matrixRecord[i][j] = this.userList.get(i).getData(j);
+                //   }
             }
         }
         return matrixRecord;
     }
+
+    public String[][] getMatrixReportes(List<CareerModel> careerList) {
+        String[][] matrixRecord = new String[this.userList.size()][UserModel.HEADER_Reports.length];
+
+        for (int i = 0; i < this.userList.size(); i++) {
+            UserModel userModel = this.userList.get(i);
+            CareerModel careerModel = careerList.get(0);
+            if (i < careerList.size()) {
+                careerModel = careerList.get(i);
+            }
+
+            matrixRecord[i][0] = userModel.getUser();
+
+            if (userModel.getListaPerfil().size() > 0 && userModel.getListaPerfil().get(0).getTypeUser() != null && !userModel.getListaPerfil().get(0).getTypeUser().equals("")) {
+                matrixRecord[i][1] = userModel.getListaPerfil().get(0).getTypeUser();
+            } else {
+                matrixRecord[i][1] = "No contiene";
+            }
+
+            if (userModel.getListaPerfil().size() > 1 && userModel.getListaPerfil().get(1).getTypeUser() != null && !userModel.getListaPerfil().get(1).getTypeUser().equals("")) {
+                matrixRecord[i][2] = userModel.getListaPerfil().get(1).getTypeUser();
+            } else {
+                matrixRecord[i][2] = "No contiene";
+            }
+
+            if (careerModel.getUsuarios().size() > i && careerModel.getUsuarios().get(i).getUser() != null && careerModel.getUsuarios().get(i).getId()!= null) {
+                matrixRecord[i][3] = careerModel.getUsuarios().get(i).getId().toString();
+            } else {
+                matrixRecord[i][3] = "No contiene";
+            }
+        }
+        return matrixRecord;
+    }           
+    
 
     public UserModel find(String userP) {
         for (UserModel user : userList) {

@@ -18,6 +18,7 @@ import lombok.*;
 public class UserModel {
 
     public static final String[] HEADER_STUDENTS = {"User", "First Name", "Last Name", "Email", "Phone", "Carne"};
+    public static final String[] HEADER_Reports = {"User", "Perfil", "perfil Secundario", "Carrera"};
 
     private Long id;
     private String user;

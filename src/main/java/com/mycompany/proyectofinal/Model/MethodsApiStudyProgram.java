@@ -144,7 +144,7 @@ public class MethodsApiStudyProgram {
         ObjectMapper objectMapper = new ObjectMapper();
         ArrayNode listaPerfilJson = objectMapper.valueToTree(course);
 
-         ObjectNode jsonNode = objectMapper.createObjectNode();
+        ObjectNode jsonNode = objectMapper.createObjectNode();
         jsonNode.put("id", id);
         jsonNode.put("name", name);
         jsonNode.put("description", description);
@@ -154,7 +154,7 @@ public class MethodsApiStudyProgram {
         jsonNode.putArray("listaPerfil").addAll(listaPerfilJson);
 
         String json = jsonNode.toString();
-              
+
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .header("Content-Type", "application/json")
@@ -195,6 +195,26 @@ public class MethodsApiStudyProgram {
         return matrixRecord;
     }
 
+    public String[][] getMatrixStudyCourse() {
+        String[][] matrixRecord = new String[this.curriculumList.size()][StudyProgramModel.HEADER_CURRICULUM_CURSES.length];
+        for (int i = 0; i < matrixRecord.length; i++) {
+            for (int j = 0; j < matrixRecord[0].length; j++) {
+                matrixRecord[i][0] = this.curriculumList.get(i).getData(0);
+                matrixRecord[i][1] = String.valueOf(this.curriculumList.get(i).getCursos().size());
+
+                StringBuilder cursosConcatenados = new StringBuilder();
+                for (CourseModel course : this.curriculumList.get(i).getCursos()) {
+                    cursosConcatenados.append(course.getName()).append("- ");
+                }
+                String cursosString = cursosConcatenados.toString();
+                matrixRecord[i][2] = cursosString;
+                
+                matrixRecord[i][3] = this.curriculumList.get(i).getData(2);             
+            }
+        }
+        return matrixRecord;
+    }
+
     public StudyProgramModel find(String name) {
         for (StudyProgramModel curriculum : curriculumList) {
             if (curriculum.getName().equalsIgnoreCase(name)) {
@@ -203,5 +223,5 @@ public class MethodsApiStudyProgram {
         }
         return null;
     }
-    
+
 }

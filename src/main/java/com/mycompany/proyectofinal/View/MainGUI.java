@@ -32,6 +32,7 @@ public class MainGUI extends javax.swing.JFrame {
         this.btnPlanCourses.addActionListener(controller);
         this.btnExit.addActionListener(controller);
         this.btnUsersCareer.addActionListener(controller);
+        this.btnReports.addActionListener(controller);
     }
 
     public PanelUsers getPanelUsers() {
@@ -66,6 +67,10 @@ public class MainGUI extends javax.swing.JFrame {
         return panelUsersCareer1;
     }
 
+    public ReportsPanel getReportsPanel() {
+        return reportsPanel1;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -84,6 +89,7 @@ public class MainGUI extends javax.swing.JFrame {
         btnPlanCourses = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
         btnUsersCareer = new javax.swing.JButton();
+        btnReports = new javax.swing.JButton();
         tbPanel = new javax.swing.JTabbedPane();
         panelUsers1 = new com.mycompany.proyectofinal.View.PanelUsers();
         panelStudyProgram1 = new com.mycompany.proyectofinal.View.PanelStudyProgram();
@@ -93,6 +99,7 @@ public class MainGUI extends javax.swing.JFrame {
         panelUsersAdminUsers1 = new com.mycompany.proyectofinal.View.PanelUsersAdminUsers();
         panelPlanCourse1 = new com.mycompany.proyectofinal.View.PanelPlanCourse();
         panelUsersCareer1 = new com.mycompany.proyectofinal.View.PanelUsersCareer();
+        reportsPanel1 = new com.mycompany.proyectofinal.View.ReportsPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -142,12 +149,18 @@ public class MainGUI extends javax.swing.JFrame {
         btnPlanCourses.setContentAreaFilled(false);
 
         btnExit.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnExit.setText("Exit");
+        btnExit.setText("X");
+        btnExit.setToolTipText("");
+        btnExit.setActionCommand("Exit");
         btnExit.setContentAreaFilled(false);
 
         btnUsersCareer.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnUsersCareer.setText("Users-Career");
         btnUsersCareer.setContentAreaFilled(false);
+
+        btnReports.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnReports.setText("Reports");
+        btnReports.setContentAreaFilled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -156,19 +169,21 @@ public class MainGUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(btnMenu)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 196, Short.MAX_VALUE)
                 .addComponent(btnUsers)
-                .addGap(38, 38, 38)
+                .addGap(18, 18, 18)
                 .addComponent(btnUsersCareer)
-                .addGap(41, 41, 41)
+                .addGap(18, 18, 18)
                 .addComponent(btnStudyProgram)
-                .addGap(34, 34, 34)
+                .addGap(18, 18, 18)
                 .addComponent(btnCareers)
-                .addGap(41, 41, 41)
+                .addGap(18, 18, 18)
                 .addComponent(btnCourses)
-                .addGap(58, 58, 58)
+                .addGap(28, 28, 28)
                 .addComponent(btnPlanCourses)
-                .addGap(45, 45, 45)
+                .addGap(18, 18, 18)
+                .addComponent(btnReports)
+                .addGap(41, 41, 41)
                 .addComponent(btnExit)
                 .addGap(37, 37, 37))
         );
@@ -184,7 +199,8 @@ public class MainGUI extends javax.swing.JFrame {
                     .addComponent(btnMenu)
                     .addComponent(btnPlanCourses)
                     .addComponent(btnExit)
-                    .addComponent(btnUsersCareer))
+                    .addComponent(btnUsersCareer)
+                    .addComponent(btnReports))
                 .addGap(6, 6, 6))
         );
 
@@ -199,6 +215,7 @@ public class MainGUI extends javax.swing.JFrame {
         tbPanel.addTab("tab6", panelUsersAdminUsers1);
         tbPanel.addTab("tab7", panelPlanCourse1);
         tbPanel.addTab("tab8", panelUsersCareer1);
+        tbPanel.addTab("tab9", reportsPanel1);
 
         tbPanel.setSelectedIndex(4);
 
@@ -227,6 +244,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JButton btnExit;
     public javax.swing.JButton btnMenu;
     public javax.swing.JButton btnPlanCourses;
+    public javax.swing.JButton btnReports;
     public javax.swing.JButton btnStudyProgram;
     public javax.swing.JButton btnUsers;
     public javax.swing.JButton btnUsersCareer;
@@ -239,6 +257,7 @@ public class MainGUI extends javax.swing.JFrame {
     private com.mycompany.proyectofinal.View.PanelUsers panelUsers1;
     private com.mycompany.proyectofinal.View.PanelUsersAdminUsers panelUsersAdminUsers1;
     private com.mycompany.proyectofinal.View.PanelUsersCareer panelUsersCareer1;
+    private com.mycompany.proyectofinal.View.ReportsPanel reportsPanel1;
     public javax.swing.JTabbedPane tbPanel;
     // End of variables declaration//GEN-END:variables
 }
