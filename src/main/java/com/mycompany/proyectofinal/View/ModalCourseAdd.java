@@ -95,11 +95,15 @@ public class ModalCourseAdd extends javax.swing.JFrame {
 
         jLabel5.setText("Modality");
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Add Career");
 
+        btnAddCareer.setBackground(new java.awt.Color(109, 169, 210));
         btnAddCareer.setText("Add");
         btnAddCareer.setActionCommand("AddDataCourse");
 
+        btnBackModal.setBackground(new java.awt.Color(48, 115, 183));
+        btnBackModal.setForeground(new java.awt.Color(204, 255, 255));
         btnBackModal.setText("Back");
 
         jLabel7.setText("Work Hours");
@@ -182,7 +186,7 @@ public class ModalCourseAdd extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(txtInitials, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();

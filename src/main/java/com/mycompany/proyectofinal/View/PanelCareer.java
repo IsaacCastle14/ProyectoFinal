@@ -88,8 +88,12 @@ public class PanelCareer extends javax.swing.JPanel {
         btnDelete = new javax.swing.JButton();
         btnPatch = new javax.swing.JButton();
 
-        jLabel1.setText("Panel Career");
+        setPreferredSize(new java.awt.Dimension(1184, 724));
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setText("CAREER");
+
+        tblCarrers.setBackground(new java.awt.Color(150, 186, 224));
         tblCarrers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -103,6 +107,8 @@ public class PanelCareer extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblCarrers);
 
+        btnAdd.setBackground(new java.awt.Color(0, 76, 142));
+        btnAdd.setForeground(new java.awt.Color(204, 255, 255));
         btnAdd.setText("Add");
         btnAdd.setActionCommand("AddCareer");
 
@@ -112,11 +118,16 @@ public class PanelCareer extends javax.swing.JPanel {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Filter:");
 
+        btnDelete.setBackground(new java.awt.Color(48, 115, 183));
+        btnDelete.setForeground(new java.awt.Color(204, 255, 255));
         btnDelete.setText("Delete");
         btnDelete.setActionCommand("DeleteCareer");
 
+        btnPatch.setBackground(new java.awt.Color(109, 169, 210));
+        btnPatch.setForeground(new java.awt.Color(0, 0, 0));
         btnPatch.setText("Patch");
         btnPatch.setActionCommand("PatchCareer");
 
@@ -124,12 +135,10 @@ public class PanelCareer extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(287, Short.MAX_VALUE)
+                .addContainerGap(43, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(102, 102, 102)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAdd)
@@ -147,9 +156,7 @@ public class PanelCareer extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel1)
-                .addGap(12, 12, 12)
+                .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
@@ -159,8 +166,10 @@ public class PanelCareer extends javax.swing.JPanel {
                         .addComponent(btnDelete)
                         .addComponent(btnPatch)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

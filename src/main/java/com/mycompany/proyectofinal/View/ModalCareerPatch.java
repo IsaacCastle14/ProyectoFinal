@@ -92,11 +92,16 @@ public class ModalCareerPatch extends javax.swing.JFrame {
 
         jLabel5.setText("Working Market");
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Patch Career");
 
+        btnAddCareer.setBackground(new java.awt.Color(0, 76, 142));
+        btnAddCareer.setForeground(new java.awt.Color(204, 255, 255));
         btnAddCareer.setText("Patch");
         btnAddCareer.setActionCommand("PatchDataCareer");
 
+        btnBackModal.setBackground(new java.awt.Color(150, 186, 224));
+        btnBackModal.setForeground(new java.awt.Color(0, 0, 0));
         btnBackModal.setText("Back");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -156,7 +161,7 @@ public class ModalCareerPatch extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtWorkingMarket, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         pack();

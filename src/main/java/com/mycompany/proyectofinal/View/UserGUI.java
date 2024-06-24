@@ -10,55 +10,32 @@ import java.awt.event.ActionListener;
  *
  * @author josh
  */
-public class MainGUI extends javax.swing.JFrame {
-
-    /**
-     * Creates new form MainGUI
-     */
-    private int mouseX;
+public class UserGUI extends javax.swing.JFrame {
+    
+     private int mouseX;
     private int mouseY;
 
-    public MainGUI() {
+    /**
+     * Creates new form UserGUI
+     */
+    public UserGUI() {
         initComponents();
-        setLocationRelativeTo(null);
     }
-
+    
     public void listen(ActionListener controller) {
         this.btnCareers.addActionListener(controller);
         this.btnCourses.addActionListener(controller);
         this.btnStudyProgram.addActionListener(controller);
         this.btnUsers.addActionListener(controller);
         this.btnMenu.addActionListener(controller);
-        this.btnPlanCourses.addActionListener(controller);
-        this.btnExit.addActionListener(controller);
     }
 
     public PanelUsers getPanelUsers() {
         return panelUsers1;
     }
-
-    public PanelStudyProgram getPanelStudyProgram() {
-        return panelStudyProgram1;
-    }
-
-    public PanelCareer getPanelCareer() {
-        return panelCareer1;
-    }
-
-    public PanelCourse getPanelCourse() {
-        return panelCourse1;
-    }
-
-    public PanelMain getPanelMain() {
-        return panelMain1;
-    }
-
-    public PanelUsersAdminUsers getPanelUsersAdminUsers() {
+    
+      public PanelUsersAdminUsers getPanelUsersAdminUsers() {
         return panelUsersAdminUsers1;
-    }
-
-    public PanelPlanCourse getPanelPlanCourse() {
-        return panelPlanCourse1;
     }
 
     /**
@@ -76,23 +53,14 @@ public class MainGUI extends javax.swing.JFrame {
         btnStudyProgram = new javax.swing.JButton();
         btnUsers = new javax.swing.JButton();
         btnMenu = new javax.swing.JButton();
-        btnPlanCourses = new javax.swing.JButton();
-        btnExit = new javax.swing.JButton();
         tbPanel = new javax.swing.JTabbedPane();
         panelUsers1 = new com.mycompany.proyectofinal.View.PanelUsers();
-        panelStudyProgram1 = new com.mycompany.proyectofinal.View.PanelStudyProgram();
-        panelCareer1 = new com.mycompany.proyectofinal.View.PanelCareer();
-        panelCourse1 = new com.mycompany.proyectofinal.View.PanelCourse();
-        panelMain1 = new com.mycompany.proyectofinal.View.PanelMain();
         panelUsersAdminUsers1 = new com.mycompany.proyectofinal.View.PanelUsersAdminUsers();
-        panelPlanCourse1 = new com.mycompany.proyectofinal.View.PanelPlanCourse();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
-        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(109, 169, 210));
+        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
         jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jPanel1MouseDragged(evt);
@@ -104,8 +72,6 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
 
-        btnCourses.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnCourses.setForeground(new java.awt.Color(0, 0, 0));
         btnCourses.setText("Courses");
         btnCourses.setContentAreaFilled(false);
         btnCourses.addActionListener(new java.awt.event.ActionListener() {
@@ -114,57 +80,35 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
 
-        btnCareers.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnCareers.setForeground(new java.awt.Color(0, 0, 0));
         btnCareers.setText("Careers");
         btnCareers.setContentAreaFilled(false);
 
-        btnStudyProgram.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnStudyProgram.setForeground(new java.awt.Color(0, 0, 0));
         btnStudyProgram.setText("Study Program");
         btnStudyProgram.setContentAreaFilled(false);
 
-        btnUsers.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnUsers.setForeground(new java.awt.Color(0, 0, 0));
         btnUsers.setText("Users");
         btnUsers.setContentAreaFilled(false);
 
-        btnMenu.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnMenu.setForeground(new java.awt.Color(0, 0, 0));
         btnMenu.setText("Gestión de Actividades Académicas");
         btnMenu.setActionCommand("Menu");
         btnMenu.setContentAreaFilled(false);
-
-        btnPlanCourses.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnPlanCourses.setForeground(new java.awt.Color(0, 0, 0));
-        btnPlanCourses.setText("Plan-Courses");
-        btnPlanCourses.setContentAreaFilled(false);
-
-        btnExit.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnExit.setForeground(new java.awt.Color(0, 0, 0));
-        btnExit.setText("Exit");
-        btnExit.setContentAreaFilled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(15, 15, 15)
                 .addComponent(btnMenu)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 247, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 513, Short.MAX_VALUE)
                 .addComponent(btnUsers)
-                .addGap(36, 36, 36)
+                .addGap(56, 56, 56)
                 .addComponent(btnStudyProgram)
-                .addGap(34, 34, 34)
-                .addComponent(btnCareers)
-                .addGap(41, 41, 41)
-                .addComponent(btnCourses)
-                .addGap(58, 58, 58)
-                .addComponent(btnPlanCourses)
                 .addGap(45, 45, 45)
-                .addComponent(btnExit)
-                .addGap(37, 37, 37))
+                .addComponent(btnCareers)
+                .addGap(29, 29, 29)
+                .addComponent(btnCourses)
+                .addGap(60, 60, 60))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,9 +119,7 @@ public class MainGUI extends javax.swing.JFrame {
                     .addComponent(btnCareers)
                     .addComponent(btnStudyProgram)
                     .addComponent(btnUsers)
-                    .addComponent(btnMenu)
-                    .addComponent(btnPlanCourses)
-                    .addComponent(btnExit))
+                    .addComponent(btnMenu))
                 .addGap(6, 6, 6))
         );
 
@@ -185,19 +127,16 @@ public class MainGUI extends javax.swing.JFrame {
 
         tbPanel.setMinimumSize(new java.awt.Dimension(1280, 720));
         tbPanel.addTab("tab1", panelUsers1);
-        tbPanel.addTab("tab2", panelStudyProgram1);
-        tbPanel.addTab("tab3", panelCareer1);
-        tbPanel.addTab("tab4", panelCourse1);
-        tbPanel.addTab("tab5", panelMain1);
         tbPanel.addTab("tab6", panelUsersAdminUsers1);
-        tbPanel.addTab("tab7", panelPlanCourse1);
-
-        tbPanel.setSelectedIndex(4);
 
         getContentPane().add(tbPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCoursesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCoursesActionPerformed
+
+    }//GEN-LAST:event_btnCoursesActionPerformed
 
     private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
         this.setLocation(evt.getXOnScreen() - mouseX, evt.getYOnScreen() - mouseY);
@@ -208,25 +147,15 @@ public class MainGUI extends javax.swing.JFrame {
         mouseY = evt.getY();
     }//GEN-LAST:event_jPanel1MousePressed
 
-    private void btnCoursesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCoursesActionPerformed
-
-    }//GEN-LAST:event_btnCoursesActionPerformed
-
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnCareers;
     public javax.swing.JButton btnCourses;
-    private javax.swing.JButton btnExit;
     public javax.swing.JButton btnMenu;
-    public javax.swing.JButton btnPlanCourses;
     public javax.swing.JButton btnStudyProgram;
     public javax.swing.JButton btnUsers;
     private javax.swing.JPanel jPanel1;
-    private com.mycompany.proyectofinal.View.PanelCareer panelCareer1;
-    private com.mycompany.proyectofinal.View.PanelCourse panelCourse1;
-    private com.mycompany.proyectofinal.View.PanelMain panelMain1;
-    private com.mycompany.proyectofinal.View.PanelPlanCourse panelPlanCourse1;
-    private com.mycompany.proyectofinal.View.PanelStudyProgram panelStudyProgram1;
     private com.mycompany.proyectofinal.View.PanelUsers panelUsers1;
     private com.mycompany.proyectofinal.View.PanelUsersAdminUsers panelUsersAdminUsers1;
     public javax.swing.JTabbedPane tbPanel;

@@ -82,11 +82,16 @@ public class ModalCareerAdd extends javax.swing.JFrame {
 
         jLabel5.setText("Working Market");
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Add Career");
 
+        btnAddCareer.setBackground(new java.awt.Color(109, 169, 210));
+        btnAddCareer.setForeground(new java.awt.Color(0, 0, 0));
         btnAddCareer.setText("Add");
         btnAddCareer.setActionCommand("AddDataCareer");
 
+        btnBackModal.setBackground(new java.awt.Color(48, 115, 183));
+        btnBackModal.setForeground(new java.awt.Color(204, 255, 255));
         btnBackModal.setText("Back");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -146,7 +151,7 @@ public class ModalCareerAdd extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtWorkingMarket, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         pack();

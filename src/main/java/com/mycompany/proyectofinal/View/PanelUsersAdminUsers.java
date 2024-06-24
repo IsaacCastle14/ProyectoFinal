@@ -96,6 +96,8 @@ public class PanelUsersAdminUsers extends javax.swing.JPanel {
 
         jLabel3.setText("Registrado como:  Usuario con privilegios");
 
+        tblUsersProfile.setBackground(new java.awt.Color(0, 76, 142));
+        tblUsersProfile.setForeground(new java.awt.Color(204, 255, 255));
         tblUsersProfile.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -109,13 +111,18 @@ public class PanelUsersAdminUsers extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblUsersProfile);
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Modificar el Perfil de los estudiantes");
 
+        btnPatch.setBackground(new java.awt.Color(48, 115, 183));
         btnPatch.setText("Patch");
         btnPatch.setActionCommand("PatchUser");
 
         jLabel5.setText("Filter:");
 
+        txtFilter.setBackground(new java.awt.Color(109, 169, 210));
+        txtFilter.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtFilter.setForeground(new java.awt.Color(0, 0, 0));
         txtFilter.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtFilterKeyReleased(evt);

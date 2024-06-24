@@ -51,10 +51,13 @@ public class PanelDatos extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("User:");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, -1, -1));
 
-        txtPassword.setBackground(new java.awt.Color(153, 153, 255));
+        txtPassword.setBackground(new java.awt.Color(48, 115, 183));
+        txtPassword.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtPassword.setForeground(new java.awt.Color(221, 255, 242));
         txtPassword.setBorder(null);
         add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 131, -1));
 
@@ -63,6 +66,7 @@ public class PanelDatos extends javax.swing.JPanel {
         add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 130, 10));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Login");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, -1, -1));
 
@@ -71,10 +75,13 @@ public class PanelDatos extends javax.swing.JPanel {
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 130, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Password:");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, -1, -1));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, -1, -1));
 
-        txtUser.setBackground(new java.awt.Color(153, 153, 255));
+        txtUser.setBackground(new java.awt.Color(48, 115, 183));
+        txtUser.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtUser.setForeground(new java.awt.Color(221, 255, 255));
         txtUser.setBorder(null);
         add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 131, -1));
 
@@ -83,12 +90,13 @@ public class PanelDatos extends javax.swing.JPanel {
         jLabel6.setText("Register");
         add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, 80, -1));
 
-        btnRegister.setBackground(new java.awt.Color(102, 51, 255));
-        btnRegister.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegister.setBackground(new java.awt.Color(150, 186, 224));
+        btnRegister.setForeground(new java.awt.Color(0, 0, 0));
         btnRegister.setText("Register");
         add(btnRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 240, 80, -1));
 
-        btnLogin.setBackground(new java.awt.Color(153, 153, 255));
+        btnLogin.setBackground(new java.awt.Color(48, 115, 183));
+        btnLogin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnLogin.setText("Login");
         add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, -1, -1));
 
@@ -102,11 +110,11 @@ public class PanelDatos extends javax.swing.JPanel {
         jLabel8.setText(" to Access all our features");
         add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 200, -1, -1));
 
-        jLabel4.setBackground(new java.awt.Color(102, 51, 255));
+        jLabel4.setBackground(new java.awt.Color(0, 76, 142));
         jLabel4.setOpaque(true);
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, 330, 270));
 
-        jLabel5.setBackground(new java.awt.Color(153, 153, 255));
+        jLabel5.setBackground(new java.awt.Color(150, 186, 224));
         jLabel5.setOpaque(true);
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 350, 270));
     }// </editor-fold>//GEN-END:initComponents

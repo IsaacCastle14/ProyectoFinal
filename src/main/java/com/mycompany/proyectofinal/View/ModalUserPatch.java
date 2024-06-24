@@ -70,19 +70,26 @@ public class ModalUserPatch extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Patch Course");
 
         jLabel1.setText("User");
 
+        btnPatchCareer.setBackground(new java.awt.Color(0, 76, 142));
+        btnPatchCareer.setForeground(new java.awt.Color(204, 255, 255));
         btnPatchCareer.setText("Patch");
         btnPatchCareer.setActionCommand("PatchDataUser");
 
+        btnBackModal.setBackground(new java.awt.Color(150, 186, 224));
+        btnBackModal.setForeground(new java.awt.Color(0, 0, 0));
         btnBackModal.setText("Back");
 
         txtUser.setFocusable(false);
 
+        cbPp.setBackground(new java.awt.Color(48, 115, 183));
         cbPp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Profesor", "Estudiante", "Administrador" }));
 
+        cbPs.setBackground(new java.awt.Color(48, 115, 183));
         cbPs.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Profesor", "Estudiante", "Administrador" }));
 
         jLabel4.setText("Perfil Principal");
@@ -139,7 +146,7 @@ public class ModalUserPatch extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBackModal)
                     .addComponent(btnPatchCareer))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         pack();

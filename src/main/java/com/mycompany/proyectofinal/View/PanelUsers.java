@@ -43,22 +43,29 @@ public class PanelUsers extends javax.swing.JPanel {
         btnAsociar = new javax.swing.JButton();
         lbError = new javax.swing.JLabel();
 
-        jLabel1.setText("PanelUsers");
+        jLabel1.setText("USERS");
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Bienvenido: ");
 
         lbUser.setText(" ");
 
-        jLabel3.setText("Asocie su Usuario a uno o varios perfil");
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setText("Asocie su usuario a uno o varios perfil");
 
+        cbPp.setBackground(new java.awt.Color(0, 76, 142));
         cbPp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Profesor", "Estudiante", "Administrador" }));
 
+        cbPs.setBackground(new java.awt.Color(48, 115, 183));
         cbPs.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Profesor", "Estudiante", "Administrador" }));
 
         jLabel4.setText("Perfil Principal");
 
         jLabel5.setText("Perfil Secundario");
 
+        btnAsociar.setBackground(new java.awt.Color(109, 169, 210));
+        btnAsociar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnAsociar.setForeground(new java.awt.Color(0, 0, 0));
         btnAsociar.setText("Asociar");
 
         lbError.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -119,7 +126,7 @@ public class PanelUsers extends javax.swing.JPanel {
                 .addComponent(btnAsociar)
                 .addGap(54, 54, 54)
                 .addComponent(lbError)
-                .addContainerGap(379, Short.MAX_VALUE))
+                .addContainerGap(371, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -70,11 +70,16 @@ public class ModalStudyProgramPatch extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Patch Study Program");
 
+        btnAddCareer.setBackground(new java.awt.Color(0, 76, 142));
+        btnAddCareer.setForeground(new java.awt.Color(204, 255, 255));
         btnAddCareer.setText("Patch");
         btnAddCareer.setActionCommand("PatchDataStudyProgram");
 
+        btnBackModal.setBackground(new java.awt.Color(150, 186, 224));
+        btnBackModal.setForeground(new java.awt.Color(0, 0, 0));
         btnBackModal.setText("Back");
 
         jLabel1.setText("Name");
@@ -130,7 +135,7 @@ public class ModalStudyProgramPatch extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtNumberCredits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();

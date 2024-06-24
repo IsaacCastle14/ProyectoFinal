@@ -113,7 +113,7 @@ public class LoginController implements ActionListener {
                 }
                 break;
 
-            case "Exit":
+            case "X":
                 System.exit(0);
                 break;
 

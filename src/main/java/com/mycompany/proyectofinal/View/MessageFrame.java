@@ -36,13 +36,13 @@ public class MessageFrame extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(150, 186, 224));
 
-        lbError.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbError.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbError.setForeground(new java.awt.Color(204, 0, 0));
         lbError.setText("Usuario sin permisos suficientes");
 
-        lbError1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbError1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lbError1.setForeground(new java.awt.Color(204, 0, 0));
         lbError1.setText("Error: ");
 
@@ -53,12 +53,12 @@ public class MessageFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(175, 175, 175)
-                        .addComponent(lbError1))
+                        .addGap(85, 85, 85)
+                        .addComponent(lbError))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(lbError, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(100, Short.MAX_VALUE))
+                        .addGap(165, 165, 165)
+                        .addComponent(lbError1)))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -67,7 +67,7 @@ public class MessageFrame extends javax.swing.JFrame {
                 .addComponent(lbError1)
                 .addGap(18, 18, 18)
                 .addComponent(lbError)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

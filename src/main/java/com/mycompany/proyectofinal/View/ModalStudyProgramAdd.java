@@ -71,11 +71,16 @@ public class ModalStudyProgramAdd extends javax.swing.JFrame {
 
         jLabel3.setText("Number of Credits");
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Add Study Program");
 
+        btnAddCareer.setBackground(new java.awt.Color(109, 169, 210));
+        btnAddCareer.setForeground(new java.awt.Color(0, 0, 0));
         btnAddCareer.setText("Add");
         btnAddCareer.setActionCommand("AddDataStudyProgram");
 
+        btnBackModal.setBackground(new java.awt.Color(48, 115, 183));
+        btnBackModal.setForeground(new java.awt.Color(204, 255, 255));
         btnBackModal.setText("Back");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -121,7 +126,7 @@ public class ModalStudyProgramAdd extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNumberCredits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();

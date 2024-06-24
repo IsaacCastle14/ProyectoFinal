@@ -287,6 +287,10 @@ public class MainController implements ActionListener {
                     System.out.println("Asocia tu usuario a un perfil");
                 }
                 break;
+                
+                case "Exit":
+                System.exit(0);
+                break;
         }
     }
 }
