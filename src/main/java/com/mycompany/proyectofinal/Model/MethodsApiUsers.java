@@ -191,9 +191,9 @@ public class MethodsApiUsers {
         String[][] matrixRecord = new String[this.userList.size()][UserModel.HEADER_STUDENTS.length];
         for (int i = 0; i < matrixRecord.length; i++) {
             for (int j = 0; j < matrixRecord[0].length; j++) {
-                if (this.userList.get(i).getCarrera() == null) {
+             //   if (this.userList.get(i).getCarrera() == null) {
                     matrixRecord[i][j] = this.userList.get(i).getData(j);                    
-                }
+             //   }
             }
         }
         return matrixRecord;

@@ -299,6 +299,7 @@ public class MainController implements ActionListener {
                 if (!methodsApiUsers.getUserTemp().getListaPerfil().isEmpty()) {
                     if (UserModel.verficarPerfiles(methodsApiUsers.getUserTemp()).equals("Profesor")
                             || UserModel.verficarPerfiles(methodsApiUsers.getUserTemp()).equals("Administrador")) {
+                        panelUsersCareer.lbUser.setText(methodsApiUsers.getUserTemp().getUser());
                         mainGUI.tbPanel.setSelectedIndex(7);
                         try {
                             methodsApiUsers.getApiData("http://localhost:8080/usuario/allUsuario");

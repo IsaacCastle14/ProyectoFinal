@@ -27,20 +27,8 @@ public class UserModel {
     private String password;
     private String phone;
     private String carne;
-    private CareerModel carrera;
+    //private CareerModel carrera;
     private List<PerfilModel> listaPerfil;
-    
-    public UserModel(Long id, String user, String firstName, String lastName, String email, String password, String phone, String carne, List<PerfilModel> listaPerfil) {
-        this.id = id;
-        this.user = user;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.phone = phone;
-        this.carne = carne;
-        this.listaPerfil = listaPerfil;
-    }
     
     
 
