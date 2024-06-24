@@ -12,6 +12,9 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import java.util.List;
 
 /**
  *
@@ -23,6 +26,10 @@ public class MethodsApiStudyProgram {
     private int codigo = 0;
     private Long select;
     private String[] userTemp;
+
+    public ArrayList<StudyProgramModel> getCurriculumList() {
+        return curriculumList;
+    }
 
     public String getUserTemp(int field) {
         switch (field) {
@@ -114,12 +121,40 @@ public class MethodsApiStudyProgram {
                 .join();
     }
 
-    public void patchApi(String url, Long id, String name, String description, String numberCredits, String effectiveDate, String approvalDate) {
+    public void postApi(String url) {
         codigo = 0;
         HttpClient client = HttpClient.newHttpClient();
 
-        String json = "{ \"id\": \"" + id + "\", \"name\": \"" + name + "\", \"description\": \"" + description + "\", \"numberCredits\": \"" + numberCredits + "\", \"effectiveDate\": \"" + effectiveDate + "\", \"approvalDate\": \"" + approvalDate + "\" }";
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(""))
+                .build();
 
+        client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(response -> response.statusCode())
+                .thenAccept(response -> setCodigo(response))
+                .join();
+    }
+
+    public void patchApi(String url, Long id, String name, String description, String numberCredits, String effectiveDate, String approvalDate, List<CourseModel> course) {
+        codigo = 0;
+        HttpClient client = HttpClient.newHttpClient();
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        ArrayNode listaPerfilJson = objectMapper.valueToTree(course);
+
+         ObjectNode jsonNode = objectMapper.createObjectNode();
+        jsonNode.put("id", id);
+        jsonNode.put("name", name);
+        jsonNode.put("description", description);
+        jsonNode.put("numberCredits", numberCredits);
+        jsonNode.put("effectiveDate", effectiveDate);
+        jsonNode.put("approvalDate", approvalDate);
+        jsonNode.putArray("listaPerfil").addAll(listaPerfilJson);
+
+        String json = jsonNode.toString();
+              
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .header("Content-Type", "application/json")
@@ -168,4 +203,5 @@ public class MethodsApiStudyProgram {
         }
         return null;
     }
+    
 }

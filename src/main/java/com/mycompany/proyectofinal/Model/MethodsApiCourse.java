@@ -20,9 +20,15 @@ import com.fasterxml.jackson.core.type.TypeReference;
 public class MethodsApiCourse {
 
     ArrayList<CourseModel> courseList;
+    ArrayList<CourseModel> coursePlanList = new ArrayList();
     private int codigo = 0;
     private Long select;
     private String[] userTemp;
+
+    public ArrayList<CourseModel> getCoursePlanList() {
+        return coursePlanList;
+    }
+        
 
     public String getUserTemp(int field) {
         switch (field) {
@@ -105,7 +111,7 @@ public class MethodsApiCourse {
         return courseList;
     }
 
-    public void postApi(String url, String description, String name, String blockBelonging,  String teachingHours, String modality, String independentWorkHours, String creditQuantity, String initials ) {
+    public void postApi(String url, String description, String name, String blockBelonging, String teachingHours, String modality, String independentWorkHours, String creditQuantity, String initials) {
         codigo = 0;
         HttpClient client = HttpClient.newHttpClient();
 
@@ -123,7 +129,7 @@ public class MethodsApiCourse {
                 .join();
     }
 
-    public void patchApi(String url, Long id, String description, String name, String blockBelonging,  String teachingHours, String modality, String independentWorkHours, String creditQuantity, String initials) {
+    public void patchApi(String url, Long id, String description, String name, String blockBelonging, String teachingHours, String modality, String independentWorkHours, String creditQuantity, String initials) {
         codigo = 0;
         HttpClient client = HttpClient.newHttpClient();
 
@@ -164,6 +170,28 @@ public class MethodsApiCourse {
         for (int i = 0; i < matrixRecord.length; i++) {
             for (int j = 0; j < matrixRecord[0].length; j++) {
                 matrixRecord[i][j] = this.courseList.get(i).getData(j);
+            }
+        }
+        return matrixRecord;
+    }
+
+    public void add(CourseModel courseModel) {
+        coursePlanList.add(courseModel);
+    }
+
+    public void delete(CourseModel courseModel) {
+        coursePlanList.remove(courseModel);
+    }
+
+    public void resetArrayList() {
+        coursePlanList = new ArrayList();
+    }
+
+    public String[][] getMatrixPlanCourse() {
+        String[][] matrixRecord = new String[this.coursePlanList.size()][CourseModel.HEADER_COURSE.length];
+        for (int i = 0; i < matrixRecord.length; i++) {
+            for (int j = 0; j < matrixRecord[0].length; j++) {
+                matrixRecord[i][j] = this.coursePlanList.get(i).getData(j);
             }
         }
         return matrixRecord;

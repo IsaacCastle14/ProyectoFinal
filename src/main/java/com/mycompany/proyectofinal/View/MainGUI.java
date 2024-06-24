@@ -29,6 +29,7 @@ public class MainGUI extends javax.swing.JFrame {
         this.btnStudyProgram.addActionListener(controller);
         this.btnUsers.addActionListener(controller);
         this.btnMenu.addActionListener(controller);
+        this.btnPlanCourses.addActionListener(controller);
     }
 
     public PanelUsers getPanelUsers() {
@@ -55,6 +56,10 @@ public class MainGUI extends javax.swing.JFrame {
         return panelUsersAdminUsers1;
     }
 
+    public PanelPlanCourse getPanelPlanCourse() {
+        return panelPlanCourse1;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -70,6 +75,7 @@ public class MainGUI extends javax.swing.JFrame {
         btnStudyProgram = new javax.swing.JButton();
         btnUsers = new javax.swing.JButton();
         btnMenu = new javax.swing.JButton();
+        btnPlanCourses = new javax.swing.JButton();
         tbPanel = new javax.swing.JTabbedPane();
         panelUsers1 = new com.mycompany.proyectofinal.View.PanelUsers();
         panelStudyProgram1 = new com.mycompany.proyectofinal.View.PanelStudyProgram();
@@ -77,6 +83,7 @@ public class MainGUI extends javax.swing.JFrame {
         panelCourse1 = new com.mycompany.proyectofinal.View.PanelCourse();
         panelMain1 = new com.mycompany.proyectofinal.View.PanelMain();
         panelUsersAdminUsers1 = new com.mycompany.proyectofinal.View.PanelUsersAdminUsers();
+        panelPlanCourse1 = new com.mycompany.proyectofinal.View.PanelPlanCourse();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -116,6 +123,9 @@ public class MainGUI extends javax.swing.JFrame {
         btnMenu.setActionCommand("Menu");
         btnMenu.setContentAreaFilled(false);
 
+        btnPlanCourses.setText("Plan-Courses");
+        btnPlanCourses.setContentAreaFilled(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -123,7 +133,7 @@ public class MainGUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(btnMenu)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 532, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 386, Short.MAX_VALUE)
                 .addComponent(btnUsers)
                 .addGap(56, 56, 56)
                 .addComponent(btnStudyProgram)
@@ -131,7 +141,9 @@ public class MainGUI extends javax.swing.JFrame {
                 .addComponent(btnCareers)
                 .addGap(29, 29, 29)
                 .addComponent(btnCourses)
-                .addGap(60, 60, 60))
+                .addGap(45, 45, 45)
+                .addComponent(btnPlanCourses)
+                .addGap(63, 63, 63))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,7 +154,8 @@ public class MainGUI extends javax.swing.JFrame {
                     .addComponent(btnCareers)
                     .addComponent(btnStudyProgram)
                     .addComponent(btnUsers)
-                    .addComponent(btnMenu))
+                    .addComponent(btnMenu)
+                    .addComponent(btnPlanCourses))
                 .addGap(6, 6, 6))
         );
 
@@ -155,6 +168,7 @@ public class MainGUI extends javax.swing.JFrame {
         tbPanel.addTab("tab4", panelCourse1);
         tbPanel.addTab("tab5", panelMain1);
         tbPanel.addTab("tab6", panelUsersAdminUsers1);
+        tbPanel.addTab("tab7", panelPlanCourse1);
 
         tbPanel.setSelectedIndex(4);
 
@@ -181,12 +195,14 @@ public class MainGUI extends javax.swing.JFrame {
     public javax.swing.JButton btnCareers;
     public javax.swing.JButton btnCourses;
     public javax.swing.JButton btnMenu;
+    public javax.swing.JButton btnPlanCourses;
     public javax.swing.JButton btnStudyProgram;
     public javax.swing.JButton btnUsers;
     private javax.swing.JPanel jPanel1;
     private com.mycompany.proyectofinal.View.PanelCareer panelCareer1;
     private com.mycompany.proyectofinal.View.PanelCourse panelCourse1;
     private com.mycompany.proyectofinal.View.PanelMain panelMain1;
+    private com.mycompany.proyectofinal.View.PanelPlanCourse panelPlanCourse1;
     private com.mycompany.proyectofinal.View.PanelStudyProgram panelStudyProgram1;
     private com.mycompany.proyectofinal.View.PanelUsers panelUsers1;
     private com.mycompany.proyectofinal.View.PanelUsersAdminUsers panelUsersAdminUsers1;

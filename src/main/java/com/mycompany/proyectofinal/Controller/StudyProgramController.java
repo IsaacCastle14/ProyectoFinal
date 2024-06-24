@@ -5,6 +5,7 @@
 package com.mycompany.proyectofinal.Controller;
 
 import com.mycompany.proyectofinal.Model.DateModel;
+import com.mycompany.proyectofinal.Model.MethodsApiCourse;
 import com.mycompany.proyectofinal.Model.MethodsApiStudyProgram;
 import com.mycompany.proyectofinal.Model.MethodsApiUsers;
 import com.mycompany.proyectofinal.Model.StudyProgramModel;
@@ -29,13 +30,14 @@ public class StudyProgramController implements ActionListener, MouseListener {
     ModalStudyProgramPatch modalStudyProgramPatch;
     MethodsApiStudyProgram methodsApiStudyProgram;
     PanelStudyProgram panelStudyProgram;
+    MethodsApiCourse methodsApiCourse;
 
-    public StudyProgramController(MethodsApiStudyProgram methodsApiStudyProgramParam, PanelStudyProgram panelStudyProgramParam) {
+    public StudyProgramController(MethodsApiStudyProgram methodsApiStudyProgramParam, PanelStudyProgram panelStudyProgramParam, MethodsApiCourse methodsApiCourseParam) {
         this.panelStudyProgram = panelStudyProgramParam;
         modalStudyProgramAdd = new ModalStudyProgramAdd();
         modalStudyProgramPatch = new ModalStudyProgramPatch();
         methodsApiStudyProgram = methodsApiStudyProgramParam;
-
+        methodsApiCourse = methodsApiCourseParam;
         panelStudyProgram.listen(this);
         panelStudyProgram.ListenMouse(this);
         modalStudyProgramAdd.listen(this);
@@ -96,14 +98,17 @@ public class StudyProgramController implements ActionListener, MouseListener {
 
             case "PatchDataStudyProgram":
                 if (modalStudyProgramPatch.isComplete()) {
+                      methodsApiCourse.getApiData("http://localhost:8080/curso/allCurso");
                     try {
+                        StudyProgramModel model = methodsApiStudyProgram.find(methodsApiStudyProgram.getUserTemp(0));
                         methodsApiStudyProgram.patchApi("http://localhost:8080/planEstudio",
                                 methodsApiStudyProgram.getSelect(),
                                 modalStudyProgramPatch.txtName.getText(),
                                 modalStudyProgramPatch.txtDescription.getText(),
                                 modalStudyProgramPatch.txtNumberCredits.getText(),
                                 DateModel.obtenerFechaHoraHoyFormateada(),
-                                DateModel.obtenerFechaHoraHoyFormateada());
+                                DateModel.obtenerFechaHoraHoyFormateada(),
+                                model.getCursos());
 
                         System.out.print(methodsApiStudyProgram.getCodigo());
 

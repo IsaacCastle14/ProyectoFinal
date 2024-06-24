@@ -4,6 +4,7 @@
  */
 package com.mycompany.proyectofinal.Model;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,6 +29,7 @@ public class CourseModel {
     private String independentWorkHours;
     private String creditQuantity;
     private String initials;
+    private List<StudyProgramModel> planesEstudio;
 
     public String getData(int colum) {
         switch (colum) {

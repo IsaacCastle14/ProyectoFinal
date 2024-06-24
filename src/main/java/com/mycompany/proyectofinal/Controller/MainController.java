@@ -18,6 +18,7 @@ import com.mycompany.proyectofinal.View.ModalUserPatch;
 import com.mycompany.proyectofinal.View.PanelCareer;
 import com.mycompany.proyectofinal.View.PanelCourse;
 import com.mycompany.proyectofinal.View.PanelMain;
+import com.mycompany.proyectofinal.View.PanelPlanCourse;
 import com.mycompany.proyectofinal.View.PanelStudyProgram;
 import com.mycompany.proyectofinal.View.PanelUsers;
 import com.mycompany.proyectofinal.View.PanelUsersAdminUsers;
@@ -48,6 +49,8 @@ public class MainController implements ActionListener {
     CoursesController coursesController;
     CareersController careersController;
     UsersController usersController;
+    PlanCourseController planCourseController;
+    PanelPlanCourse panelPlanCourse;
 
     public MainController(MethodsApiUsers methodsApiUsersInstance) {
         mainGUI = new MainGUI();
@@ -62,6 +65,8 @@ public class MainController implements ActionListener {
         panelCareer = mainGUI.getPanelCareer();
         panelCourse = mainGUI.getPanelCourse();
         panelMain = mainGUI.getPanelMain();
+        panelPlanCourse = mainGUI.getPanelPlanCourse();
+
         messageFrame = new MessageFrame();
         mainGUI.listen(this);
     }
@@ -111,7 +116,7 @@ public class MainController implements ActionListener {
             //ModuleStudyProgram//
             case "Study Program":
                 if (studyProgramController == null) {
-                    studyProgramController = new StudyProgramController(methodsApiStudyProgram, panelStudyProgram);
+                    studyProgramController = new StudyProgramController(methodsApiStudyProgram, panelStudyProgram, methodsApiCourse);
                 }
                 if (!methodsApiUsers.getUserTemp().getListaPerfil().isEmpty()) {
                     if (UserModel.verficarPerfiles(methodsApiUsers.getUserTemp()).equals("Profesor")
@@ -237,7 +242,51 @@ public class MainController implements ActionListener {
                     System.out.println("Asocia tu usuario a un perfil");
                 }
                 break;
-            //END Module Curse//        
+            //END Module Curse//   
+
+            case "Plan-Courses":
+                if (planCourseController == null) {
+                    planCourseController = new PlanCourseController(panelPlanCourse, methodsApiCourse,methodsApiStudyProgram);
+                }
+                if (!methodsApiUsers.getUserTemp().getListaPerfil().isEmpty()) {
+                    if (UserModel.verficarPerfiles(methodsApiUsers.getUserTemp()).equals("Profesor")
+                            || UserModel.verficarPerfiles(methodsApiUsers.getUserTemp()).equals("Administrador")) {
+                        mainGUI.tbPanel.setSelectedIndex(6);
+
+                        try {
+                            methodsApiCourse.getApiData("http://localhost:8080/curso/allCurso");
+                            panelPlanCourse.setTableCourse(CourseModel.HEADER_COURSE, methodsApiCourse.getMatrix());
+                            methodsApiStudyProgram.getApiData("http://localhost:8080/planEstudio/allPlanEstudio");
+                            panelPlanCourse.inicializarComboBoxStudyProgram(methodsApiStudyProgram.getCurriculumList());
+
+                        } catch (Exception error) {
+                            System.out.print(error);
+                        }
+                    } else {
+                        messageFrame.setVisible(true);
+                        Timer timer = new Timer(2000, new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                messageFrame.setVisible(false);
+                            }
+                        });
+                        timer.setRepeats(false);
+                        timer.start();
+                    }
+                } else {
+                    mainGUI.tbPanel.setSelectedIndex(0);
+                    panelUsers.lbError.setText("Asocia primero a tu perfil");
+                    Timer timer = new Timer(2000, new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            panelUsers.lbError.setText("");
+                        }
+                    });
+                    timer.setRepeats(false);
+                    timer.start();
+                    System.out.println("Asocia tu usuario a un perfil");
+                }
+                break;
         }
     }
 }
