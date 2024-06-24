@@ -51,6 +51,8 @@ public class PlanCourseController implements ActionListener, MouseListener {
                             System.out.println("error: " + ex);
                         }
                     }
+                    methodsApiStudyProgram.getApiData("http://localhost:8080/planEstudio/allPlanEstudio");
+                    panelPlanCourse.inicializarComboBoxStudyProgram(methodsApiStudyProgram.getCurriculumList());
                     methodsApiCourse.resetArrayList();
                     panelPlanCourse.setTableCourseSelect(CourseModel.HEADER_COURSE, methodsApiCourse.getMatrixPlanCourse());
 

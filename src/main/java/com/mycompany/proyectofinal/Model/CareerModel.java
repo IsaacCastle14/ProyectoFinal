@@ -4,6 +4,7 @@
  */
 package com.mycompany.proyectofinal.Model;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,7 @@ public class CareerModel {
     private String workingMarket;
     private String name;
     private String professionalProfile;
+    private List<UserModel> usuarios;      
 
     public String getData(int colum) {
         switch (colum) {

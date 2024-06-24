@@ -86,8 +86,7 @@ public class MethodsApiUsers {
         ObjectMapper objectMapper = new ObjectMapper();
         userList = null;
         try {
-            userList = objectMapper.readValue(responseBody, new TypeReference<ArrayList<UserModel>>() {
-            });
+            userList = objectMapper.readValue(responseBody, new TypeReference<ArrayList<UserModel>>() {});
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -119,6 +118,22 @@ public class MethodsApiUsers {
                 .uri(URI.create(url))
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(json))
+                .build();
+
+        client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(response -> response.statusCode())
+                .thenAccept(response -> setCodigo(response))
+                .join();
+    }
+
+    public void postApi(String url) {
+        codigo = 0;
+        HttpClient client = HttpClient.newHttpClient();
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(""))
                 .build();
 
         client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
@@ -166,6 +181,18 @@ public class MethodsApiUsers {
             for (int j = 0; j < matrixRecord[0].length; j++) {
                 if (this.userList.get(i).getListaPerfil().isEmpty()) {
                     matrixRecord[i][j] = this.userList.get(i).getData(j);
+                }
+            }
+        }
+        return matrixRecord;
+    }
+
+    public String[][] getMatrixWIthoutFilters() {
+        String[][] matrixRecord = new String[this.userList.size()][UserModel.HEADER_STUDENTS.length];
+        for (int i = 0; i < matrixRecord.length; i++) {
+            for (int j = 0; j < matrixRecord[0].length; j++) {
+                if (this.userList.get(i).getCarrera() == null) {
+                    matrixRecord[i][j] = this.userList.get(i).getData(j);                    
                 }
             }
         }

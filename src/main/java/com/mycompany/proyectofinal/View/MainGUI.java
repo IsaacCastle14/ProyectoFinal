@@ -31,6 +31,7 @@ public class MainGUI extends javax.swing.JFrame {
         this.btnMenu.addActionListener(controller);
         this.btnPlanCourses.addActionListener(controller);
         this.btnExit.addActionListener(controller);
+        this.btnUsersCareer.addActionListener(controller);
     }
 
     public PanelUsers getPanelUsers() {
@@ -61,6 +62,10 @@ public class MainGUI extends javax.swing.JFrame {
         return panelPlanCourse1;
     }
 
+    public PanelUsersCareer getPanelUsersCareer() {
+        return panelUsersCareer1;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -78,6 +83,7 @@ public class MainGUI extends javax.swing.JFrame {
         btnMenu = new javax.swing.JButton();
         btnPlanCourses = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
+        btnUsersCareer = new javax.swing.JButton();
         tbPanel = new javax.swing.JTabbedPane();
         panelUsers1 = new com.mycompany.proyectofinal.View.PanelUsers();
         panelStudyProgram1 = new com.mycompany.proyectofinal.View.PanelStudyProgram();
@@ -86,6 +92,7 @@ public class MainGUI extends javax.swing.JFrame {
         panelMain1 = new com.mycompany.proyectofinal.View.PanelMain();
         panelUsersAdminUsers1 = new com.mycompany.proyectofinal.View.PanelUsersAdminUsers();
         panelPlanCourse1 = new com.mycompany.proyectofinal.View.PanelPlanCourse();
+        panelUsersCareer1 = new com.mycompany.proyectofinal.View.PanelUsersCareer();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -105,7 +112,6 @@ public class MainGUI extends javax.swing.JFrame {
         });
 
         btnCourses.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnCourses.setForeground(new java.awt.Color(0, 0, 0));
         btnCourses.setText("Courses");
         btnCourses.setContentAreaFilled(false);
         btnCourses.addActionListener(new java.awt.event.ActionListener() {
@@ -115,35 +121,33 @@ public class MainGUI extends javax.swing.JFrame {
         });
 
         btnCareers.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnCareers.setForeground(new java.awt.Color(0, 0, 0));
         btnCareers.setText("Careers");
         btnCareers.setContentAreaFilled(false);
 
         btnStudyProgram.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnStudyProgram.setForeground(new java.awt.Color(0, 0, 0));
         btnStudyProgram.setText("Study Program");
         btnStudyProgram.setContentAreaFilled(false);
 
         btnUsers.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnUsers.setForeground(new java.awt.Color(0, 0, 0));
         btnUsers.setText("Users");
         btnUsers.setContentAreaFilled(false);
 
         btnMenu.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnMenu.setForeground(new java.awt.Color(0, 0, 0));
         btnMenu.setText("Gestión de Actividades Académicas");
         btnMenu.setActionCommand("Menu");
         btnMenu.setContentAreaFilled(false);
 
         btnPlanCourses.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnPlanCourses.setForeground(new java.awt.Color(0, 0, 0));
         btnPlanCourses.setText("Plan-Courses");
         btnPlanCourses.setContentAreaFilled(false);
 
         btnExit.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnExit.setForeground(new java.awt.Color(0, 0, 0));
         btnExit.setText("Exit");
         btnExit.setContentAreaFilled(false);
+
+        btnUsersCareer.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnUsersCareer.setText("Users-Career");
+        btnUsersCareer.setContentAreaFilled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -152,9 +156,11 @@ public class MainGUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(btnMenu)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 247, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
                 .addComponent(btnUsers)
-                .addGap(36, 36, 36)
+                .addGap(38, 38, 38)
+                .addComponent(btnUsersCareer)
+                .addGap(41, 41, 41)
                 .addComponent(btnStudyProgram)
                 .addGap(34, 34, 34)
                 .addComponent(btnCareers)
@@ -177,7 +183,8 @@ public class MainGUI extends javax.swing.JFrame {
                     .addComponent(btnUsers)
                     .addComponent(btnMenu)
                     .addComponent(btnPlanCourses)
-                    .addComponent(btnExit))
+                    .addComponent(btnExit)
+                    .addComponent(btnUsersCareer))
                 .addGap(6, 6, 6))
         );
 
@@ -191,6 +198,7 @@ public class MainGUI extends javax.swing.JFrame {
         tbPanel.addTab("tab5", panelMain1);
         tbPanel.addTab("tab6", panelUsersAdminUsers1);
         tbPanel.addTab("tab7", panelPlanCourse1);
+        tbPanel.addTab("tab8", panelUsersCareer1);
 
         tbPanel.setSelectedIndex(4);
 
@@ -221,6 +229,7 @@ public class MainGUI extends javax.swing.JFrame {
     public javax.swing.JButton btnPlanCourses;
     public javax.swing.JButton btnStudyProgram;
     public javax.swing.JButton btnUsers;
+    public javax.swing.JButton btnUsersCareer;
     private javax.swing.JPanel jPanel1;
     private com.mycompany.proyectofinal.View.PanelCareer panelCareer1;
     private com.mycompany.proyectofinal.View.PanelCourse panelCourse1;
@@ -229,6 +238,7 @@ public class MainGUI extends javax.swing.JFrame {
     private com.mycompany.proyectofinal.View.PanelStudyProgram panelStudyProgram1;
     private com.mycompany.proyectofinal.View.PanelUsers panelUsers1;
     private com.mycompany.proyectofinal.View.PanelUsersAdminUsers panelUsersAdminUsers1;
+    private com.mycompany.proyectofinal.View.PanelUsersCareer panelUsersCareer1;
     public javax.swing.JTabbedPane tbPanel;
     // End of variables declaration//GEN-END:variables
 }

@@ -24,6 +24,10 @@ public class MethodsApiCareers {
     private Long select;
     private String[] userTemp;
 
+    public ArrayList<CareerModel> getCareerList() {
+        return careerList;
+    }
+
     public String getUserTemp(int field) {
         switch (field) {
             case 0 -> {

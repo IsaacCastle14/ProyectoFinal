@@ -22,6 +22,7 @@ import com.mycompany.proyectofinal.View.PanelPlanCourse;
 import com.mycompany.proyectofinal.View.PanelStudyProgram;
 import com.mycompany.proyectofinal.View.PanelUsers;
 import com.mycompany.proyectofinal.View.PanelUsersAdminUsers;
+import com.mycompany.proyectofinal.View.PanelUsersCareer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -51,12 +52,15 @@ public class MainController implements ActionListener {
     UsersController usersController;
     PlanCourseController planCourseController;
     PanelPlanCourse panelPlanCourse;
+    PanelUsersCareer panelUsersCareer;
+    UsersCareerController usersCareerController;
 
     public MainController(MethodsApiUsers methodsApiUsersInstance) {
         mainGUI = new MainGUI();
         mainGUI.setVisible(true);
         panelUsers = mainGUI.getPanelUsers();
         panelUsersAdminUsers = mainGUI.getPanelUsersAdminUsers();
+        panelUsersCareer = mainGUI.getPanelUsersCareer();
         methodsApiCareers = new MethodsApiCareers();
         methodsApiCourse = new MethodsApiCourse();
         methodsApiUsers = methodsApiUsersInstance;
@@ -246,7 +250,7 @@ public class MainController implements ActionListener {
 
             case "Plan-Courses":
                 if (planCourseController == null) {
-                    planCourseController = new PlanCourseController(panelPlanCourse, methodsApiCourse,methodsApiStudyProgram);
+                    planCourseController = new PlanCourseController(panelPlanCourse, methodsApiCourse, methodsApiStudyProgram);
                 }
                 if (!methodsApiUsers.getUserTemp().getListaPerfil().isEmpty()) {
                     if (UserModel.verficarPerfiles(methodsApiUsers.getUserTemp()).equals("Profesor")
@@ -287,10 +291,52 @@ public class MainController implements ActionListener {
                     System.out.println("Asocia tu usuario a un perfil");
                 }
                 break;
-                
-                case "Exit":
+
+            case "Users-Career":
+                if (usersCareerController == null) {
+                    usersCareerController = new UsersCareerController(methodsApiUsers, panelUsersCareer, methodsApiCareers);
+                }
+                if (!methodsApiUsers.getUserTemp().getListaPerfil().isEmpty()) {
+                    if (UserModel.verficarPerfiles(methodsApiUsers.getUserTemp()).equals("Profesor")
+                            || UserModel.verficarPerfiles(methodsApiUsers.getUserTemp()).equals("Administrador")) {
+                        mainGUI.tbPanel.setSelectedIndex(7);
+                        try {
+                            methodsApiUsers.getApiData("http://localhost:8080/usuario/allUsuario");
+                            panelUsersCareer.setTable(UserModel.HEADER_STUDENTS, methodsApiUsers.getMatrixWIthoutFilters());
+
+                        } catch (Exception error) {
+                            System.out.print(error);
+                        }
+                    } else {
+                        messageFrame.setVisible(true);
+                        Timer timer = new Timer(2000, new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                messageFrame.setVisible(false);
+                            }
+                        });
+                        timer.setRepeats(false);
+                        timer.start();
+                    }
+                } else {
+                    mainGUI.tbPanel.setSelectedIndex(0);
+                    panelUsers.lbError.setText("Asocia primero a tu perfil");
+                    Timer timer = new Timer(2000, new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            panelUsers.lbError.setText("");
+                        }
+                    });
+                    timer.setRepeats(false);
+                    timer.start();
+                    System.out.println("Asocia tu usuario a un perfil");
+                }
+                break;
+
+            case "Exit":
                 System.exit(0);
                 break;
+
         }
     }
 }
