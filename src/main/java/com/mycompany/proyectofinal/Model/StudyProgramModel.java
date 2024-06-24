@@ -30,7 +30,7 @@ public class StudyProgramModel {
     private String effectiveDate;
     private String approvalDate;
     private List<CourseModel> cursos;
-
+        
     public String getData(int colum) {
         switch (colum) {
             case 0 -> {
